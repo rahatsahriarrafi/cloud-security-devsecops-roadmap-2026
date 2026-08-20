@@ -242,10 +242,10 @@ section,
 .hero {
   position: relative;
   overflow: hidden; /* clip background pattern only; title must fit inside */
-  min-height: min(92vh, 820px);
+  min-height: min(84vh, 760px);
   display: grid;
-  align-items: end;
-  padding: 4.5rem 0 3.5rem;
+  align-items: center;
+  padding: 2.25rem 0 2.75rem;
   isolation: isolate;
 }
 

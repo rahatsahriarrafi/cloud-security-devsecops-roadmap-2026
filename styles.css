@@ -271,6 +271,10 @@ section,
 }
 
 .hero-brand {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.28em;
   font-family: var(--font-display);
   font-weight: 800;
   /* Sized to keep "CloudSec Path" fully visible on one line inside the wrap */
@@ -280,16 +284,17 @@ section,
   margin: 0 0 1.1rem;
   color: var(--ink);
   animation: rise 0.9s ease both;
-  white-space: nowrap;
   max-width: 100%;
+  min-width: 0;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
 }
 
 .hero-brand .brand-word {
-  display: inline;
-  white-space: inherit;
+  display: inline-block;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .hero-brand em,
@@ -958,8 +963,9 @@ tr:last-child td {
   }
 
   .hero-brand {
+    display: flex;
+    flex-wrap: nowrap;
     font-size: clamp(1.55rem, 6.2vw, 2.6rem);
-    white-space: nowrap;
     word-break: normal;
     overflow-wrap: normal;
   }
@@ -1254,12 +1260,17 @@ tr:last-child td {
     word-break: normal;
   }
 
-  .hero-brand,
-  .hero-brand .brand-word {
-    white-space: nowrap !important;
+  .hero-brand {
+    display: flex !important;
+    flex-wrap: nowrap !important;
     word-break: normal !important;
     overflow-wrap: normal !important;
     hyphens: none !important;
+  }
+
+  .hero-brand .brand-word {
+    flex: 0 0 auto;
+    white-space: nowrap !important;
   }
 
   .phase-tabs,
@@ -1356,9 +1367,10 @@ tr:last-child td {
   }
 
   .hero-brand {
+    display: flex !important;
+    flex-wrap: nowrap !important;
     font-size: clamp(1.35rem, 6.5vw, 1.75rem) !important;
     letter-spacing: -0.03em;
-    white-space: nowrap !important;
     word-break: normal !important;
     overflow-wrap: normal !important;
   }

@@ -1735,5 +1735,114 @@ window.ROADMAP = {
       ],
       "demo": "Show blocked injection attempt + allowed safe query side-by-side"
     }
-  ]
+  ],
+  "certPlan": {
+    "title": "Recommended path (best ROI)",
+    "rule": "Checkpoint lab first, then exam — never the reverse. Pick one cloud and stay on that track.",
+    "tracks": [
+      {
+        "name": "AWS track",
+        "steps": [
+          "CCP (optional)",
+          "AWS Security Specialty",
+          "CKA → CKS"
+        ]
+      },
+      {
+        "name": "Azure track",
+        "steps": [
+          "AZ-900 (optional)",
+          "AZ-500",
+          "CKA → CKS"
+        ]
+      },
+      {
+        "name": "GCP track",
+        "steps": [
+          "Cloud Digital Leader / ACE (optional)",
+          "Professional Cloud Security Engineer",
+          "CKA → CKS"
+        ]
+      }
+    ],
+    "roiPath": [
+      {
+        "stage": "1",
+        "when": "After Phase 0–1",
+        "cert": "AWS Cloud Practitioner or AZ-900 (optional)",
+        "why": "Only if you are new to cloud"
+      },
+      {
+        "stage": "2",
+        "when": "After Phase 2",
+        "cert": "AWS Security Specialty or AZ-500",
+        "why": "Core cloud security hiring signal"
+      },
+      {
+        "stage": "3",
+        "when": "After Phase 3–4",
+        "cert": "Optional Security+ if you need a general baseline",
+        "why": "AppSec / DevSecOps context — portfolio still matters more"
+      },
+      {
+        "stage": "4",
+        "when": "After Phase 5",
+        "cert": "CKA → CKS",
+        "why": "Strong for Kubernetes / platform security roles"
+      },
+      {
+        "stage": "5",
+        "when": "After Phase 6–7",
+        "cert": "Finish cloud security cert if not done; practice IR with native tools",
+        "why": "Identity + detection depth for Cloud SOC paths"
+      },
+      {
+        "stage": "6",
+        "when": "Later (1–2 years experience)",
+        "cert": "CCSP or CISSP",
+        "why": "Architecture / senior roles — after real depth"
+      }
+    ],
+    "twelveMonth": [
+      {
+        "months": "1–3",
+        "focus": "Foundations + cloud core → optional CCP / AZ-900"
+      },
+      {
+        "months": "4–7",
+        "focus": "Cloud security + DevSecOps labs → AWS Security Specialty or AZ-500"
+      },
+      {
+        "months": "8–10",
+        "focus": "Kubernetes labs → CKA, then CKS"
+      },
+      {
+        "months": "11–12",
+        "focus": "Portfolio + interviews; only then consider CCSP"
+      }
+    ],
+    "byRole": [
+      {
+        "role": "Cloud Security Engineer",
+        "certs": "AWS Security Specialty / AZ-500"
+      },
+      {
+        "role": "DevSecOps / Product Security",
+        "certs": "Cloud security cert + pipeline portfolio (CKS helps)"
+      },
+      {
+        "role": "Platform Security",
+        "certs": "CKS (+ cloud security cert)"
+      },
+      {
+        "role": "Detection / Cloud SOC",
+        "certs": "Cloud security cert + detection-as-code projects"
+      }
+    ],
+    "skipEarly": [
+      "Do not stack 5 certs with empty GitHub",
+      "Do not take CISSP / CCSP before real labs",
+      "Do not chase GIAC first unless your employer pays"
+    ]
+  }
 };

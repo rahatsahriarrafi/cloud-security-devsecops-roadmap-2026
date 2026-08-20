@@ -502,6 +502,94 @@
     });
   }
 
+
+  function renderCertPlan() {
+    const plan = data.certPlan;
+    if (!plan) return;
+    const rule = document.getElementById("cert-rule");
+    if (rule) rule.textContent = plan.rule;
+
+    const roi = document.getElementById("cert-roi-body");
+    if (roi) {
+      roi.innerHTML = (plan.roiPath || [])
+        .map(function (r) {
+          return (
+            "<tr><td><strong>" +
+            escapeHtml(r.stage) +
+            "</strong></td><td>" +
+            escapeHtml(r.when) +
+            "</td><td>" +
+            escapeHtml(r.cert) +
+            "</td><td>" +
+            escapeHtml(r.why) +
+            "</td></tr>"
+          );
+        })
+        .join("");
+    }
+
+    const tracks = document.getElementById("cert-tracks");
+    if (tracks) {
+      tracks.innerHTML = (plan.tracks || [])
+        .map(function (t) {
+          return (
+            '<article class="cert-track-card"><h3>' +
+            escapeHtml(t.name) +
+            "</h3><ol>" +
+            (t.steps || [])
+              .map(function (s) {
+                return "<li>" + escapeHtml(s) + "</li>";
+              })
+              .join("") +
+            "</ol></article>"
+          );
+        })
+        .join("");
+    }
+
+    const year = document.getElementById("cert-year-body");
+    if (year) {
+      year.innerHTML = (plan.twelveMonth || [])
+        .map(function (r) {
+          return (
+            "<tr><td><strong>" +
+            escapeHtml(r.months) +
+            "</strong></td><td>" +
+            escapeHtml(r.focus) +
+            "</td></tr>"
+          );
+        })
+        .join("");
+    }
+
+    const roles = document.getElementById("cert-role-body");
+    if (roles) {
+      roles.innerHTML = (plan.byRole || [])
+        .map(function (r) {
+          return (
+            "<tr><td><strong>" +
+            escapeHtml(r.role) +
+            "</strong></td><td>" +
+            escapeHtml(r.certs) +
+            "</td></tr>"
+          );
+        })
+        .join("");
+    }
+
+    const skip = document.getElementById("cert-skip");
+    if (skip) {
+      skip.innerHTML =
+        "<strong>What to skip early</strong><ul>" +
+        (plan.skipEarly || [])
+          .map(function (s) {
+            return "<li>" + escapeHtml(s) + "</li>";
+          })
+          .join("") +
+        "</ul>";
+    }
+  }
+
   function renderTrends() {
     trendsEl.innerHTML = data.trends
       .map(

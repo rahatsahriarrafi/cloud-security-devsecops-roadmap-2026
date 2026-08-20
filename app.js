@@ -691,8 +691,12 @@
   }
 
   updateProgress();
+  renderWeekSummary();
   setActive(activeId, false);
   renderTrends();
   renderSkills();
   renderRhythm();
+  renderMasterProjects();
+  renderPhaseProjectIndex();
+  renderCertPlan();
 })();

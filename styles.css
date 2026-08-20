@@ -27,7 +27,8 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -40,9 +41,12 @@ body {
     linear-gradient(180deg, #f4f8f5 0%, var(--paper) 40%, #e8f0eb 100%);
   min-height: 100vh;
   line-height: 1.55;
-  overflow-x: clip;
+  max-width: 100%;
+  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 img {
@@ -159,7 +163,24 @@ a {
 
 .wrap {
   width: min(var(--max), calc(100% - 2.5rem));
+  max-width: 100%;
   margin-inline: auto;
+  padding-inline: 0;
+  box-sizing: border-box;
+}
+
+main,
+section,
+.nav,
+.footer,
+.phase-map,
+.phase-row-wrap,
+.phase-shell,
+.author-card,
+.trend-grid,
+.map-controls {
+  max-width: 100%;
+  min-width: 0;
 }
 
 /* Nav */
@@ -1050,5 +1071,144 @@ tr:last-child td {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+
+/* Hard mobile text containment */
+@media (max-width: 980px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+  }
+
+  .wrap {
+    width: calc(100% - 1.25rem) !important;
+    max-width: calc(100vw - 1.25rem) !important;
+    margin-inline: auto;
+  }
+
+  h1, h2, h3, h4, p, li, td, th, a, span, button, label, strong {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .hero-brand,
+  .hero-headline,
+  .section-title,
+  .phase-panel h3,
+  .author-name {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .phase-tabs,
+  .phase-map,
+  .phase-panel,
+  .phase-row-wrap,
+  .phase-row,
+  .mini-block,
+  .week-card,
+  .trend-card,
+  .callout,
+  .author-card,
+  .table-wrap,
+  .panel-actions,
+  .cta-row {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Keep wide tables inside a scroll box without expanding the page */
+  .table-wrap {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .table-wrap table {
+    min-width: 0;
+    width: max-content;
+    max-width: none;
+  }
+
+  /* Phase map: hide long checkpoint line on small phones; show under title only if needed */
+  .phase-row {
+    grid-template-columns: 2rem minmax(0, 1fr) !important;
+    grid-template-areas:
+      "num title"
+      "dur dur" !important;
+  }
+
+  .phase-row .check {
+    display: none !important;
+  }
+
+  .phase-row .title,
+  .phase-row .dur {
+    white-space: normal !important;
+  }
+
+  .phase-tabs {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .btn {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    height: auto;
+    line-height: 1.25;
+    padding-block: 0.75rem;
+  }
+
+  .pill {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .author-meta {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .author-meta li:not(:last-child)::after {
+    content: none;
+  }
+
+  .footer-social {
+    max-width: 100%;
+  }
+
+  .footer-social a {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .wrap {
+    width: calc(100% - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+  }
+
+  .hero-brand {
+    font-size: 2rem !important;
+    letter-spacing: -0.03em;
+  }
+
+  .meta-item {
+    padding: 0.85rem;
+  }
+
+  .phase-panel {
+    padding: 0.85rem 0.75rem 1rem !important;
   }
 }

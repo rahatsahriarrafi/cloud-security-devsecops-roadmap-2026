@@ -48,7 +48,8 @@
           <p class="hero-headline">Cloud Security + DevSecOps roadmap for 2026.</p>
           <p class="hero-support">
             A lab-first route from foundations to CNAPP, supply chain, and AI-system
-            security — built to ship proof, not just certificates.
+            security — built to ship proof, not just certificates. Curated by
+            <a href="#author">Rahat Sahriar Rafi</a>.
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#phases">Start with Phase 0</a>
@@ -87,6 +88,14 @@
             <strong>How to use this roadmap</strong>
             Skip early phases only if you can already pass their checkpoints.
             Experienced DevOps engineers often enter at Phase 2–4.
+          </div>
+          <div class="map-controls">
+            <label class="sr-only" for="phase-search">Search phases</label>
+            <input id="phase-search" type="search" placeholder="Search phases, topics, tools…" autocomplete="off" />
+            <div class="progress-bar-wrap" aria-live="polite">
+              <div class="progress-label"><span>Your progress</span> <strong id="progress-text">0 / 10</strong></div>
+              <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            </div>
           </div>
           <div class="phase-map" id="phase-map"></div>
         </div>
@@ -191,8 +200,7 @@
             <div class="author-copy">
               <h3 class="author-name">Rahat Sahriar Rafi</h3>
               <p class="author-role">
-                Software Engineering Student at Daffodil International University ·
-                Aspiring Web Developer &amp; Cybersecurity Enthusiast
+                Software Engineering Student at Daffodil International University · Aspiring Web Developer &amp; Cybersecurity Enthusiast
               </p>
               <p class="author-bio">
                 Building CloudSec Path as a practical learning track for cloud security
@@ -201,8 +209,15 @@
               </p>
               <div class="author-links">
                 <a class="btn btn-primary" href="https://github.com/rahatsahriarrafi" rel="noopener noreferrer" target="_blank">GitHub</a>
+                <a class="btn btn-ghost" href="https://www.linkedin.com/in/rahat-sahriar-rafi" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+                <a class="btn btn-ghost" href="https://www.facebook.com/rahatsahriarrafi" rel="noopener noreferrer" target="_blank">Facebook</a>
                 <a class="btn btn-ghost" href="https://github.com/rahatsahriarrafi/cloud-security-devsecops-roadmap-2026" rel="noopener noreferrer" target="_blank">This project</a>
               </div>
+              <ul class="author-meta">
+                <li>Dhaka, Bangladesh</li>
+                <li>Daffodil International University</li>
+                <li>Cloud Security · DevSecOps · Web</li>
+              </ul>
             </div>
           </article>
         </div>
@@ -215,13 +230,15 @@
           CloudSec Path — curated by
           <a href="#author">Rahat Sahriar Rafi</a>
         </div>
-        <div>
-          <a href="https://github.com/rahatsahriarrafi/cloud-security-devsecops-roadmap-2026"
-            >Source on GitHub</a
-          >
+        <div class="footer-social">
+          <a href="https://github.com/rahatsahriarrafi" rel="noopener noreferrer" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/rahat-sahriar-rafi" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          <a href="https://www.facebook.com/rahatsahriarrafi" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a href="https://github.com/rahatsahriarrafi/cloud-security-devsecops-roadmap-2026" rel="noopener noreferrer" target="_blank">Source</a>
         </div>
       </div>
     </footer>
+    <button type="button" class="to-top" id="to-top" aria-label="Back to top">Top</button>
 
     <script src="./data.js"></script>
     <script src="./app.js"></script>

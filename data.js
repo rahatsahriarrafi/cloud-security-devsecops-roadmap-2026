@@ -1,0 +1,567 @@
+window.ROADMAP = {
+  meta: {
+    brand: "CloudSec Path",
+    year: "2026",
+    tagline: "A lab-first route from foundations to CNAPP, supply chain, and AI-system security.",
+    duration: "12–18 months FTE",
+    phases: 10,
+  },
+  trends: [
+    { trend: "CNAPP consolidation", why: "Orgs prefer correlated posture + workload + identity over a dozen point tools." },
+    { trend: "ASPM & owner-centric AppSec", why: "Findings without service ownership do not reduce risk." },
+    { trend: "Software supply chain attestations", why: "SBOM + provenance become procurement and release gates." },
+    { trend: "Workload identity everywhere", why: "Static cloud keys in CI are treated as incidents." },
+    { trend: "AI / agent security", why: "LLM apps and coding agents expand data and tool-abuse risk." },
+    { trend: "eBPF runtime visibility", why: "Container runtime detection moves closer to the kernel." },
+  ],
+  rhythm: [
+    ["Mon–Tue", "Deep study + notes (concepts, cloud docs, one whitepaper)"],
+    ["Wed", "Hands-on lab in cloud / local cluster"],
+    ["Thu", "Pipeline / automation — encode what you learned"],
+    ["Fri", "Write-up: diagram, controls list, what broke"],
+    ["Weekend (2-4h)", "Optional CTF-lite / cert practice"],
+  ],
+  skills: [
+    { domain: "Cloud IAM", junior: "Apply managed policies safely", mid: "Design least privilege + federation", senior: "Org-wide identity architecture + JIT" },
+    { domain: "IaC security", junior: "Run Checkov and fix findings", mid: "Custom policies + module standards", senior: "Platform paved-road modules" },
+    { domain: "CI/CD security", junior: "Add scanners to a pipeline", mid: "OIDC, signing, severity gates", senior: "Supply-chain SLSA program" },
+    { domain: "Kubernetes", junior: "PSS + basic NetworkPolicy", mid: "Admission policies + runtime alerts", senior: "Multi-tenant platform security" },
+    { domain: "Detection", junior: "Use native findings (GuardDuty)", mid: "Custom detections + runbooks", senior: "Detection-as-code + SOC design" },
+    { domain: "Governance", junior: "Map controls to CIS", mid: "Automate evidence collection", senior: "Risk framework + exception board" },
+  ],
+  phases: [
+    {
+      id: "foundations",
+      order: 0,
+      title: "Foundations",
+      duration: "4–6 weeks",
+      goal: "Build the operating-system, networking, and security literacy every cloud control rests on.",
+      outcomes: [
+        "Explain CIA triad, threat vs vulnerability vs risk, and shared-responsibility model",
+        "Read TCP/IP, DNS, TLS, HTTP basics without guessing",
+        "Use Linux shell, permissions, processes, and logs confidently",
+        "Map OWASP Top 10 to real application failure modes",
+      ],
+      topics: [
+        {
+          title: "Security fundamentals",
+          depth: "Must know",
+          items: [
+            "CIA / AAA, authentication vs authorization",
+            "Risk scoring, asset inventory, attack surface",
+            "Cryptography essentials: hashing, symmetric/asymmetric, certificates, KMS concepts",
+            "Compliance awareness: ISO 27001, SOC 2, NIST CSF, CIS Controls (high level)",
+          ],
+        },
+        {
+          title: "Networking & Linux",
+          depth: "Must know",
+          items: [
+            "OSI / TCP-IP, ports, firewalls, NAT, VPN, zero-trust mental model",
+            "DNS, load balancers, TLS handshake, mTLS idea",
+            "Linux: users/groups, sudo, systemd, journalctl, iptables/nftables overview",
+            "Bash scripting for triage and automation stubs",
+          ],
+        },
+        {
+          title: "App security literacy",
+          depth: "Working knowledge",
+          items: [
+            "OWASP Top 10 (2021/2025 awareness) and ASVS orientation",
+            "Injection, broken auth, SSRF, insecure design, supply-chain intro",
+            "Secure coding habits in one language you already know",
+          ],
+        },
+      ],
+      tools: ["Linux VM", "Wireshark (light)", "OpenSSL CLI", "git", "curl / dig / nmap (lab only)"],
+      labs: [
+        "Hardened Ubuntu: SSH keys, fail2ban concept, log review",
+        "TLS lab: create CSR, inspect cert chain, verify cipher suites",
+        "Threat-model a simple 3-tier web app on paper (STRIDE)",
+      ],
+      checkpoint: "Write a 1-page shared-responsibility + threat model for a sample SaaS.",
+    },
+    {
+      id: "cloud-core",
+      order: 1,
+      title: "Cloud Platform Core",
+      duration: "6–8 weeks",
+      goal: "Become fluent in one major cloud (AWS recommended; Azure/GCP as second) at the architecture level.",
+      outcomes: [
+        "Design a secure VPC/VNet with public/private tiers",
+        "Deploy compute, storage, DB, and identity primitives safely",
+        "Use IaC for repeatable environments",
+        "Read billing, org structure, and landing-zone concepts",
+      ],
+      topics: [
+        {
+          title: "Pick a primary cloud",
+          depth: "Deep on one",
+          items: [
+            "AWS path: IAM, VPC, EC2, S3, RDS, Lambda, CloudTrail, Config, GuardDuty overview",
+            "Azure path: Entra ID, VNet, VM, Storage, Key Vault, Defender for Cloud overview",
+            "GCP path: IAM, VPC, GCE, GCS, Cloud Logging/Security Command Center overview",
+            "Multi-account / management groups / folders and org policies",
+          ],
+        },
+        {
+          title: "Landing zones & networking",
+          depth: "Must know",
+          items: [
+            "Hub-spoke / inspection VPC patterns",
+            "Security groups / NSGs / firewall policies",
+            "Private endpoints, service endpoints, egress control",
+            "Bastion / Session Manager; no long-lived SSH keys on bastions",
+          ],
+        },
+        {
+          title: "IaC baseline",
+          depth: "Must know",
+          items: [
+            "Terraform or OpenTofu: state, modules, workspaces",
+            "CloudFormation / Bicep / Pulumi as alternatives",
+            "Policy-as-code intro (OPA/Conftest or cloud-native SCP/Azure Policy)",
+          ],
+        },
+      ],
+      tools: ["AWS/Azure/GCP free tier", "Terraform", "AWS CLI / az / gcloud", "CloudShell"],
+      labs: [
+        "Build a 3-tier VPC with private DB and SSM access only",
+        "Terraform module: VPC + IAM least privilege role for an app",
+        "Enable org-wide CloudTrail / Activity Log and prove an event exists",
+      ],
+      checkpoint: "Diagram + IaC repo for a minimal secure landing zone.",
+    },
+    {
+      id: "cloud-security",
+      order: 2,
+      title: "Cloud Security Controls",
+      duration: "8–10 weeks",
+      goal: "Own preventive, detective, and corrective controls across identity, data, compute, and network in the cloud.",
+      outcomes: [
+        "Implement least-privilege IAM with short-lived credentials",
+        "Encrypt data at rest/in transit and manage keys correctly",
+        "Hardening and continuous compliance with CSPM mindset",
+        "Respond to common misconfig findings end-to-end",
+      ],
+      topics: [
+        {
+          title: "Identity & access",
+          depth: "Critical",
+          items: [
+            "Users vs roles vs policies; ABAC / tags / conditions",
+            "Federation (SAML/OIDC), SSO, SCIM",
+            "Break-glass accounts, MFA enforcement, privilege elevation",
+            "Workload identity: IRSA / Workload Identity / managed identities",
+          ],
+        },
+        {
+          title: "Data & encryption",
+          depth: "Critical",
+          items: [
+            "KMS / Key Vault / Cloud KMS: CMK vs platform keys",
+            "S3/blob/bucket policies, public access blocks, object lock",
+            "Secrets: Secrets Manager / Parameter Store — never in git",
+            "DLP concepts and classification labels",
+          ],
+        },
+        {
+          title: "CSPM & posture",
+          depth: "Must know",
+          items: [
+            "CIS Benchmarks for cloud; Security Hub / Defender / SCC findings",
+            "Config rules, Azure Policy, Organization Policy",
+            "Public exposure detection, unused IAM, open storage",
+            "Attack paths: IAM privilege escalation patterns (conceptual)",
+          ],
+        },
+        {
+          title: "Logging & evidence",
+          depth: "Must know",
+          items: [
+            "CloudTrail / Activity Logs / Audit Logs retention",
+            "VPC Flow Logs, DNS query logs, WAF logs",
+            "Immutable log destinations and integrity",
+          ],
+        },
+      ],
+      tools: [
+        "AWS Security Hub / GuardDuty / IAM Access Analyzer",
+        "Azure Defender for Cloud / Azure Policy",
+        "Prowler, ScoutSuite, CloudSploit (lab)",
+        "trivy config / checkov",
+      ],
+      labs: [
+        "Fix a deliberately broken account: public bucket, open SG, over-permissive role",
+        "Write Checkov/tfsec policies that fail bad Terraform",
+        "Rotate a secret and prove old credential is invalidated",
+      ],
+      checkpoint: "Pass a mock CSPM audit: 0 critical public exposures, MFA on root/admins.",
+    },
+    {
+      id: "devops",
+      order: 3,
+      title: "DevOps Engineering Base",
+      duration: "6–8 weeks",
+      goal: "Ship software through CI/CD like a platform engineer so you can secure the pipeline later.",
+      outcomes: [
+        "Build a CI pipeline that tests, builds, and deploys",
+        "Use containers and registries correctly",
+        "Understand GitOps vs push-based deploy",
+        "Instrument apps with basic observability",
+      ],
+      topics: [
+        {
+          title: "CI/CD platforms",
+          depth: "Must know",
+          items: [
+            "GitHub Actions / GitLab CI / Azure DevOps / Jenkins (pick one deeply)",
+            "Environments, approvals, OIDC to cloud (no static cloud keys in CI)",
+            "Artifacts, SBOM generation hooks, release promotion",
+          ],
+        },
+        {
+          title: "Containers & packaging",
+          depth: "Must know",
+          items: [
+            "Dockerfile best practices, multi-stage builds, non-root",
+            "Image registries, signing concepts (cosign)",
+            "Compose for local; orchestration preview",
+          ],
+        },
+        {
+          title: "Platform ops basics",
+          depth: "Working knowledge",
+          items: [
+            "Blue/green and canary ideas",
+            "Feature flags vs config vs secrets",
+            "Prometheus / OpenTelemetry / cloud APM awareness",
+          ],
+        },
+      ],
+      tools: ["GitHub Actions", "Docker", "Cosign (intro)", "Prometheus / Grafana (light)"],
+      labs: [
+        "CI that builds a container and pushes to a private registry via OIDC",
+        "Multi-stage Dockerfile reducing image size and running as non-root",
+        "Promote artifact staging → prod with manual approval gate",
+      ],
+      checkpoint: "A working CI/CD repo with OIDC cloud deploy and no long-lived cloud keys.",
+    },
+    {
+      id: "devsecops",
+      order: 4,
+      title: "DevSecOps & Pipeline Security",
+      duration: "8–10 weeks",
+      goal: "Shift left without blocking delivery: integrate SAST, SCA, secrets, IaC, and policy gates into the SDLC.",
+      outcomes: [
+        "Design a secure SDLC with threat modeling entry points",
+        "Wire scanners into CI with severity thresholds and exceptions",
+        "Produce and consume SBOMs; manage dependency risk",
+        "Protect the pipeline itself (poisoned pipeline execution)",
+      ],
+      topics: [
+        {
+          title: "Secure SDLC",
+          depth: "Critical",
+          items: [
+            "Requirements → design → code → build → deploy → operate security activities",
+            "Threat modeling (STRIDE / PASTA light) in sprint rituals",
+            "Security champions model and developer experience (DX)",
+          ],
+        },
+        {
+          title: "Shift-left tooling",
+          depth: "Critical",
+          items: [
+            "SAST: Semgrep, CodeQL, SonarQube - tune noise",
+            "SCA: Dependabot, Snyk, Trivy, Grype - CVE triage & VEX awareness",
+            "Secrets: gitleaks, trufflehog, pre-commit hooks",
+            "IaC security: Checkov, tfsec, Terrascan, KICS",
+            "DAST / API scanning in staging (ZAP, Burp enterprise concepts)",
+          ],
+        },
+        {
+          title: "Supply chain (2026 must)",
+          depth: "Critical",
+          items: [
+            "SLSA levels, provenance, hermetic builds (concepts)",
+            "SBOM: CycloneDX / SPDX; attestation with cosign / Sigstore",
+            "Dependency confusion, typosquatting, compromised maintainers",
+            "Pipeline hardening: fork PR isolation, reusable workflow pin by SHA",
+          ],
+        },
+        {
+          title: "Policy & gates",
+          depth: "Must know",
+          items: [
+            "OPA / Conftest / Gatekeeper policy packs",
+            "Admission control preview for Kubernetes",
+            "Risk-based waivers with expiry and owners",
+          ],
+        },
+      ],
+      tools: ["Semgrep / CodeQL", "Trivy / Grype / Syft", "gitleaks", "Checkov", "cosign + Sigstore", "OPA / Conftest"],
+      labs: [
+        "Full GitHub Actions security stage: secrets + SAST + SCA + IaC + SBOM",
+        "Block merge on critical CVEs unless VEX/waiver present",
+        "Sign image and verify signature before deploy job",
+      ],
+      checkpoint: "Documented pipeline threat model + green gated pipeline on a demo app.",
+    },
+    {
+      id: "containers",
+      order: 5,
+      title: "Kubernetes & Container Security",
+      duration: "8–10 weeks",
+      goal: "Secure workloads from image to runtime on Kubernetes (EKS/AKS/GKE or kubeadm lab).",
+      outcomes: [
+        "Apply CIS Kubernetes Benchmark controls in practice",
+        "Use network policies, Pod Security, and least-privilege service accounts",
+        "Detect runtime threats and misconfigs",
+        "Secure GitOps delivery to the cluster",
+      ],
+      topics: [
+        {
+          title: "K8s security model",
+          depth: "Critical",
+          items: [
+            "RBAC, namespaces, service accounts, IRSA/workload identity",
+            "Pod Security Standards / admission (Kyverno or Gatekeeper)",
+            "Secrets: external secrets operator, sealed secrets tradeoffs",
+            "etcd encryption, audit logging, API server hardening",
+          ],
+        },
+        {
+          title: "Network & runtime",
+          depth: "Must know",
+          items: [
+            "NetworkPolicy / Cilium policies; default deny",
+            "Runtime: Falco, Tetragon, eBPF sensors (concepts + one tool)",
+            "Image scanning at admission; deny unscanned/unsigned",
+          ],
+        },
+        {
+          title: "Platform patterns",
+          depth: "Working knowledge",
+          items: [
+            "GitOps: Argo CD / Flux security (SSO, RBAC, repo trust)",
+            "Service mesh mTLS (Istio/Linkerd) - when worth it",
+            "Multi-tenancy isolation pitfalls",
+          ],
+        },
+      ],
+      tools: ["kind / k3d / minikube", "kubectl", "Kyverno or OPA Gatekeeper", "Trivy", "Falco", "Argo CD"],
+      labs: [
+        "Cluster with PSS restricted + NetworkPolicy default deny",
+        "Kyverno policy: require non-root, drop caps, signed images",
+        "Falco alert on shell in container; triage to ticket",
+      ],
+      checkpoint: "Hardened demo cluster + policy pack + incident playbook for runtime alert.",
+    },
+    {
+      id: "identity",
+      order: 6,
+      title: "Identity, Zero Trust & Secrets",
+      duration: "5–7 weeks",
+      goal: "Treat identity as the primary perimeter across humans, workloads, and machines.",
+      outcomes: [
+        "Design SSO + MFA + conditional access for cloud consoles and apps",
+        "Implement workload identity end-to-end (no static keys)",
+        "Operate a secrets lifecycle with rotation and break-glass",
+        "Articulate Zero Trust architecture for a hybrid environment",
+      ],
+      topics: [
+        {
+          title: "Enterprise identity",
+          depth: "Critical",
+          items: [
+            "IdP: Entra ID / Okta / Keycloak — apps, groups, SCIM",
+            "OAuth2 / OIDC flows; PKCE; token lifetimes",
+            "Privileged Access Management (PAM) concepts",
+            "Just-in-time admin (AWS IAM Identity Center / PIM)",
+          ],
+        },
+        {
+          title: "Zero Trust",
+          depth: "Must know",
+          items: [
+            "NIST SP 800-207 pillars applied to cloud",
+            "Device posture, continuous verification, microsegmentation",
+            "ZTNA vs VPN; Cloudflare Access / similar patterns",
+          ],
+        },
+        {
+          title: "Secrets & certificates",
+          depth: "Must know",
+          items: [
+            "Vault / cloud secrets managers; dynamic secrets",
+            "SPIFFE/SPIRE awareness for service identity",
+            "Certificate lifecycle and ACME automation",
+          ],
+        },
+      ],
+      tools: ["Entra ID / Okta trial", "HashiCorp Vault (dev)", "cert-manager", "IAM Identity Center"],
+      labs: [
+        "App login via OIDC + MFA enforced",
+        "CI → cloud via OIDC federation only",
+        "Vault dynamic DB creds with short TTL",
+      ],
+      checkpoint: "Architecture brief: Zero Trust access to a private admin UI.",
+    },
+    {
+      id: "detection",
+      order: 7,
+      title: "Detection, IR & Cloud SOC",
+      duration: "6–8 weeks",
+      goal: "Detect, investigate, and contain cloud-native incidents with measurable MTTD/MTTR improvement.",
+      outcomes: [
+        "Build a logging architecture that is usable under incident pressure",
+        "Write detections for identity abuse, data exfil, and crypto-mining",
+        "Run tabletop + one live lab IR exercise",
+        "Automate enrichment and containment playbooks safely",
+      ],
+      topics: [
+        {
+          title: "Telemetry architecture",
+          depth: "Critical",
+          items: [
+            "Centralize CloudTrail/Activity + identity + network + workload logs",
+            "SIEM options: Sentinel, Security Lake + Athena, Elastic, Splunk concepts",
+            "Normalization, retention tiers, cost control",
+          ],
+        },
+        {
+          title: "Detections",
+          depth: "Critical",
+          items: [
+            "MITRE ATT&CK for Cloud / Containers mapping",
+            "Suspicious AssumeRole, disabled MFA, anomalous API spikes",
+            "Public snapshot / bucket policy changes; unusual egress",
+            "UEBA concepts and alert fatigue management",
+          ],
+        },
+        {
+          title: "IR & automation",
+          depth: "Must know",
+          items: [
+            "NIST IR lifecycle; evidence preservation in cloud",
+            "SOAR / Step Functions / Logic Apps playbooks",
+            "Containment: isolate SG, revoke sessions, quarantine instances",
+            "Post-incident: root cause, control gap, detection gap",
+          ],
+        },
+      ],
+      tools: ["GuardDuty / Defender / SCC", "Athena / Sentinel", "Sigma rules (concepts)", "TheHive/MISP (optional)"],
+      labs: [
+        "Simulate noisy IAM key and detect with a custom query",
+        "Playbook: auto-tag + notify + require human for revoke",
+        "Tabletop: ransomware on object storage",
+      ],
+      checkpoint: "Detection-as-code repo with 5 high-signal cloud rules + runbooks.",
+    },
+    {
+      id: "advanced",
+      order: 8,
+      title: "2026 Advanced Stack",
+      duration: "Ongoing / 8+ weeks",
+      goal: "Operate at platform-security level: CNAPP, ASPM, AI-system security, and multi-cloud governance.",
+      outcomes: [
+        "Explain CNAPP pillars and where point tools fit",
+        "Connect ASPM findings to business risk and ownership",
+        "Secure LLM/AI apps (prompt injection, data leakage, model supply chain)",
+        "Lead multi-cloud policy and exception governance",
+      ],
+      topics: [
+        {
+          title: "CNAPP & ASPM",
+          depth: "2026 core",
+          items: [
+            "CSPM + CWPP + CIEM + infrastructure-as-code + vulnerability continuum",
+            "Wiz / Prisma Cloud / Lacework / Defender CNAPP — concepts over brand loyalty",
+            "ASPM: correlate SAST/SCA/secrets/runtime to services and owners",
+            "Attack-path analysis and toxic combinations (public + admin + secret)",
+          ],
+        },
+        {
+          title: "AI / LLM security",
+          depth: "2026 rising",
+          items: [
+            "OWASP LLM Top 10; prompt injection & data exfiltration",
+            "RAG data governance; grounding vs hallucination risk",
+            "Model/API key protection; egress controls for AI agents",
+            "Secure coding assistants and shadow-AI policy in enterprises",
+          ],
+        },
+        {
+          title: "Governance at scale",
+          depth: "Senior",
+          items: [
+            "Control frameworks mapped to automated evidence",
+            "FinOps ∩ SecOps: cost of logging, scanning, idle resources",
+            "Chaos / fault injection for security resilience (carefully)",
+            "Platform engineering: paved roads with secure defaults",
+          ],
+        },
+      ],
+      tools: ["One CNAPP trial", "Open-source stack you already built", "LLM app (local RAG) for threat modeling"],
+      labs: [
+        "Map your demo environment into a CNAPP-style inventory + attack path",
+        "Threat-model an internal chatbot with tool use; add guardrails",
+        "Write org policy: AI usage + secrets + approved models",
+      ],
+      checkpoint: "Senior-style design doc: CNAPP + ASPM operating model for a mid-size org.",
+    },
+    {
+      id: "career",
+      order: 9,
+      title: "Career, Certs & Portfolio",
+      duration: "Parallel track",
+      goal: "Convert skills into credibility: certifications, public labs, and role-aligned storytelling.",
+      outcomes: [
+        "Choose certs that match your target role, not a badge wall",
+        "Ship 3 portfolio projects with write-ups",
+        "Interview with architecture + incident narratives",
+      ],
+      topics: [
+        {
+          title: "Certification ladder (pick path)",
+          depth: "Signal",
+          items: [
+            "Foundations: Security+ / AZ-900 / AWS CCP (optional if experienced)",
+            "Cloud security: AWS Security Specialty, AZ-500, Professional Cloud Security Engineer",
+            "DevSecOps-adjacent: CKS (after CKA), GIAC GCLD / GCSA (budget permitting)",
+            "Architecture: CISSP later; CCSP if cloud-governance heavy",
+          ],
+        },
+        {
+          title: "Target roles (2026)",
+          depth: "Market",
+          items: [
+            "Cloud Security Engineer — controls, IAM, CSPM, IR support",
+            "DevSecOps / Product Security — pipelines, AppSec, ASPM",
+            "Platform Security / SRE-Sec — Kubernetes, paved roads",
+            "Security Architect — Zero Trust, multi-account, frameworks",
+            "Detection Engineer (Cloud) — ATT&CK, SIEM-as-code",
+          ],
+        },
+        {
+          title: "Portfolio projects",
+          depth: "Must ship",
+          items: [
+            "Secure landing zone + Terraform + policy-as-code",
+            "Full DevSecOps pipeline with signed artifacts & SBOM",
+            "Hardened K8s + Kyverno + Falco + GitOps",
+            "Detection-as-code pack with IR runbooks",
+          ],
+        },
+      ],
+      tools: ["Public GitHub", "Blog / Notion write-ups", "Home lab or free-tier multi-account"],
+      labs: [
+        "Publish one project README with threat model + controls matrix",
+        "Mock interview: walk through a cloud breach case study",
+        "Contribute a Semgrep rule or Kyverno policy upstream",
+      ],
+      checkpoint: "Resume bullets tied to measurable outcomes (MTTD, criticals closed, coverage %).",
+    },
+  ],
+};

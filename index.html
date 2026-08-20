@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CloudSec Path — Cloud Security + DevSecOps Roadmap 2026</title>
+    <meta
+      name="description"
+      content="Lab-first Cloud Security and DevSecOps roadmap for 2026: foundations through CNAPP, supply chain, and AI-system security."
+    />
+    <meta name="theme-color" content="#0c6b5c" />
+    <meta property="og:title" content="CloudSec Path — Roadmap 2026" />
+    <meta property="og:description" content="Lab-first Cloud Security + DevSecOps curriculum: foundations to CNAPP, supply chain, and AI security." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">CloudSec <span>Path</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
+          Menu
+        </button>
+        <nav class="nav-links" id="nav-menu" aria-label="Primary">
+          <a href="#map">Phase map</a>
+          <a href="#phases">Phases</a>
+          <a href="#trends">2026 trends</a>
+          <a href="#skills">Skills</a>
+          <a href="#rhythm">Rhythm</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-visual" aria-hidden="true"></div>
+        <div class="wrap hero-copy">
+          <h1 class="hero-brand">CloudSec <em>Path</em></h1>
+          <p class="hero-headline">Cloud Security + DevSecOps roadmap for 2026.</p>
+          <p class="hero-support">
+            A lab-first route from foundations to CNAPP, supply chain, and AI-system
+            security — built to ship proof, not just certificates.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#phases">Start with Phase 0</a>
+            <a class="btn btn-ghost" href="#map">View the phase map</a>
+          </div>
+          <div class="meta-strip">
+            <div class="meta-item">
+              <strong>10</strong>
+              <span>phases</span>
+            </div>
+            <div class="meta-item">
+              <strong>12–18</strong>
+              <span>months FTE</span>
+            </div>
+            <div class="meta-item">
+              <strong>CNAPP</strong>
+              <span>2026 capstone</span>
+            </div>
+            <div class="meta-item">
+              <strong>4</strong>
+              <span>portfolio projects</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="map">
+        <div class="wrap">
+          <p class="section-kicker">Overview</p>
+          <h2 class="section-title">Phase map</h2>
+          <p class="section-lead">
+            Deep-specialize in one cloud first. Keep a weekly ship cadence. Treat
+            certifications as checkpoints after labs — not as the curriculum.
+          </p>
+          <div class="callout">
+            <strong>How to use this roadmap</strong>
+            Skip early phases only if you can already pass their checkpoints.
+            Experienced DevOps engineers often enter at Phase 2–4.
+          </div>
+          <div class="phase-map" id="phase-map"></div>
+        </div>
+      </section>
+
+      <section id="phases">
+        <div class="wrap">
+          <p class="section-kicker">Curriculum</p>
+          <h2 class="section-title">Phase detail</h2>
+          <p class="section-lead">
+            Select a phase for outcomes, topics, tools, labs, and the exit checkpoint.
+            Use Prev/Next or arrow keys while a phase tab is focused.
+          </p>
+          <div class="phase-shell">
+            <div class="phase-tabs" id="phase-tabs" role="tablist" aria-label="Roadmap phases" aria-orientation="vertical"></div>
+            <div>
+              <div class="phase-nav-bar">
+                <button type="button" class="btn btn-ghost" id="prev-phase">Previous</button>
+                <button type="button" class="btn btn-ghost" id="next-phase">Next</button>
+              </div>
+              <div class="phase-panel" id="phase-panel" role="tabpanel" tabindex="0"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trends">
+        <div class="wrap">
+          <p class="section-kicker">Market signal</p>
+          <h2 class="section-title">What changed by 2026</h2>
+          <p class="section-lead">
+            Prioritize these themes even if your tooling stack differs by employer.
+          </p>
+          <div class="trend-grid" id="trends-grid"></div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="wrap">
+          <p class="section-kicker">Progression</p>
+          <h2 class="section-title">Junior → mid → senior</h2>
+          <p class="section-lead">
+            Use this matrix to decide what “done” looks like at each career stage.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Domain</th>
+                  <th scope="col">Junior</th>
+                  <th scope="col">Mid</th>
+                  <th scope="col">Senior</th>
+                </tr>
+              </thead>
+              <tbody id="skills-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="rhythm">
+        <div class="wrap">
+          <p class="section-kicker">Cadence</p>
+          <h2 class="section-title">Suggested weekly rhythm</h2>
+          <p class="section-lead">
+            Consistency beats intensity. Encode learning into automation every week.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Block</th>
+                  <th scope="col">Focus</th>
+                </tr>
+              </thead>
+              <tbody id="rhythm-body"></tbody>
+            </table>
+          </div>
+
+          <div class="callout warning" style="margin-top: 1.75rem">
+            <strong>Common failure modes</strong>
+            Collecting certs without labs; scanning everything with no ownership model;
+            static cloud keys in CI; Kubernetes without NetworkPolicy/PSS; logging
+            everything with no detections; chasing every CNAPP vendor demo instead of
+            finishing one end-to-end secure platform.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div>CloudSec Path — Cloud Security + DevSecOps Roadmap 2026</div>
+        <div>
+          <a href="https://github.com/rahatsahriarrafi/cloud-security-devsecops-roadmap-2026"
+            >Source on GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

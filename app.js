@@ -808,7 +808,7 @@
     });
   }
 
-  /* Auto-shrink hero title so "CloudSec Path" never overflows on phones */
+  /* Auto-fit hero title: keep desktop large like the design, shrink only if needed */
   function fitHeroBrand() {
     const brand = document.querySelector(".hero-brand");
     const box = document.querySelector(".hero-copy");
@@ -819,15 +819,15 @@
     const available = Math.floor(box.clientWidth);
     if (available <= 0) return;
 
-    // Start from CSS-computed size, then shrink until it fits.
-    let size = parseFloat(window.getComputedStyle(brand).fontSize);
-    if (!size || size < 12) size = 34;
+    // Target the big desktop look first, then shrink only when overflowing.
+    const preferred = Math.min(92, Math.max(30, available * 0.092));
+    const min = Math.max(15, Math.min(28, available * 0.048));
+    let size = preferred;
+    let guard = 160;
 
-    const min = 14;
-    let guard = 80;
     brand.style.setProperty("--hero-brand-size", size + "px");
 
-    while (brand.scrollWidth > available && size > min && guard--) {
+    while (brand.scrollWidth > available - 4 && size > min && guard--) {
       size -= 0.5;
       brand.style.setProperty("--hero-brand-size", size + "px");
     }
@@ -836,7 +836,7 @@
   let fitTimer = null;
   function scheduleFitHeroBrand() {
     window.clearTimeout(fitTimer);
-    fitTimer = window.setTimeout(fitHeroBrand, 50);
+    fitTimer = window.setTimeout(fitHeroBrand, 40);
   }
 
   fitHeroBrand();

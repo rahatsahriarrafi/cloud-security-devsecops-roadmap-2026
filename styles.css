@@ -241,7 +241,7 @@ section,
 /* Hero */
 .hero {
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* clip background pattern only; title must fit inside */
   min-height: min(92vh, 820px);
   display: grid;
   align-items: end;
@@ -266,19 +266,22 @@ section,
 }
 
 .hero-copy {
-  max-width: 720px;
+  max-width: min(920px, 100%);
+  min-width: 0;
 }
 
 .hero-brand {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.15rem, 7.2vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.045em;
+  /* Sized to keep "CloudSec Path" fully visible on one line inside the wrap */
+  font-size: clamp(1.55rem, 4.6vw + 0.35rem, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   margin: 0 0 1.1rem;
   color: var(--ink);
   animation: rise 0.9s ease both;
-  white-space: nowrap; /* keep "CloudSec Path" on one line */
+  white-space: nowrap;
+  max-width: 100%;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
@@ -286,7 +289,7 @@ section,
 
 .hero-brand .brand-word {
   display: inline;
-  white-space: nowrap;
+  white-space: inherit;
 }
 
 .hero-brand em,
@@ -383,6 +386,10 @@ section,
   background: rgba(247, 250, 248, 0.72);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .meta-item strong {
@@ -390,13 +397,15 @@ section,
   font-family: var(--font-display);
   font-size: 1.35rem;
   letter-spacing: -0.03em;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0;
+  line-height: 1.15;
 }
 
 .meta-item span {
   color: var(--muted);
   font-size: 0.82rem;
   font-family: var(--font-mono);
+  line-height: 1.35;
 }
 
 section {
@@ -949,7 +958,7 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: clamp(1.85rem, 9.5vw, 2.85rem);
+    font-size: clamp(1.55rem, 6.2vw, 2.6rem);
     white-space: nowrap;
     word-break: normal;
     overflow-wrap: normal;
@@ -1151,7 +1160,7 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: clamp(2.15rem, 13vw, 3.2rem);
+    font-size: clamp(1.55rem, 5.5vw, 2.75rem);
   }
 
   .callout {
@@ -1347,7 +1356,7 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: 1.7rem !important;
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem) !important;
     letter-spacing: -0.03em;
     white-space: nowrap !important;
     word-break: normal !important;

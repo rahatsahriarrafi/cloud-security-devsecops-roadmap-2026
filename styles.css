@@ -1100,10 +1100,19 @@ tr:last-child td {
     gap: 0.75rem 1rem;
   }
 
-  .to-top {
+.to-top {
     right: max(0.85rem, env(safe-area-inset-right));
     bottom: max(0.85rem, env(safe-area-inset-bottom));
+    min-width: 2.85rem;
+    min-height: 2.85rem;
+    padding: 0;
+    border-radius: 999px;
   }
+
+  .to-top-label {
+    display: none;
+  }
+
 
   .table-wrap table {
     min-width: 560px;
@@ -1145,6 +1154,53 @@ tr:last-child td {
   }
 }
 
+
+
+.to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 60;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: #f4faf7;
+  border-radius: 999px;
+  min-width: 3rem;
+  min-height: 3rem;
+  padding: 0.7rem 0.95rem;
+  font: 600 0.82rem/1 var(--font-body);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+  box-shadow: none;
+}
+
+.to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.to-top:hover {
+  background: var(--teal-deep);
+}
+
+.to-top span[aria-hidden="true"] {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.to-top-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
 
 /* Hard mobile text containment */
 @media (max-width: 980px) {

@@ -401,7 +401,7 @@
 
   if (toTop) {
     window.addEventListener("scroll", () => {
-      toTop.classList.toggle("show", window.scrollY > 600);
+      toTop.classList.toggle("show", window.scrollY > 400);
     });
     toTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });

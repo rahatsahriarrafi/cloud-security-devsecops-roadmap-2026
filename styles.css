@@ -266,7 +266,7 @@ section,
 }
 
 .hero-copy {
-  max-width: min(920px, 100%);
+  max-width: 100%;
   min-width: 0;
 }
 
@@ -274,13 +274,12 @@ section,
   display: flex;
   flex-wrap: nowrap;
   align-items: baseline;
-  gap: 0.28em;
+  gap: 0.22em;
   font-family: var(--font-display);
   font-weight: 800;
-  /* Sized to keep "CloudSec Path" fully visible on one line inside the wrap */
-  font-size: clamp(1.55rem, 4.6vw + 0.35rem, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.15rem, 7.8vw, 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
   margin: 0 0 1.1rem;
   color: var(--ink);
   animation: rise 0.9s ease both;
@@ -965,7 +964,7 @@ tr:last-child td {
   .hero-brand {
     display: flex;
     flex-wrap: nowrap;
-    font-size: clamp(1.55rem, 6.2vw, 2.6rem);
+    font-size: clamp(2rem, 9vw, 3.4rem);
     word-break: normal;
     overflow-wrap: normal;
   }
@@ -1166,7 +1165,7 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: clamp(1.55rem, 5.5vw, 2.75rem);
+    font-size: clamp(2rem, 8.5vw, 3.6rem);
   }
 
   .callout {
@@ -1369,8 +1368,8 @@ tr:last-child td {
   .hero-brand {
     display: flex !important;
     flex-wrap: nowrap !important;
-    font-size: clamp(1.35rem, 6.5vw, 1.75rem) !important;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.85rem, 8.5vw, 2.35rem) !important;
+    letter-spacing: -0.04em;
     word-break: normal !important;
     overflow-wrap: normal !important;
   }

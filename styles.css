@@ -45,8 +45,6 @@ body {
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  word-break: break-word;
-  overflow-wrap: anywhere;
 }
 
 img {
@@ -268,15 +266,24 @@ section,
 .hero-brand {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(3.2rem, 9vw, 6.4rem);
-  line-height: 0.92;
+  font-size: clamp(2.6rem, 8vw, 6.4rem);
+  line-height: 0.95;
   letter-spacing: -0.045em;
   margin: 0 0 1.1rem;
   color: var(--ink);
   animation: rise 0.9s ease both;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
-.hero-brand em {
+.hero-brand .brand-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-brand em,
+.hero-brand em.brand-word {
   font-style: normal;
   color: var(--teal);
 }
@@ -870,7 +877,9 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: clamp(2.4rem, 12vw, 4rem);
+    font-size: clamp(2.35rem, 11vw, 3.6rem);
+    word-break: normal;
+    overflow-wrap: normal;
   }
 
   .hero-headline {
@@ -1090,20 +1099,25 @@ tr:last-child td {
     margin-inline: auto;
   }
 
-  h1, h2, h3, h4, p, li, td, th, a, span, button, label, strong {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+  h2, h3, h4, p, li, td, th, a, button, label, strong {
+    overflow-wrap: break-word;
+    word-break: normal;
     max-width: 100%;
   }
 
-  .hero-brand,
   .hero-headline,
   .section-title,
   .phase-panel h3,
   .author-name {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .hero-brand,
+  .hero-brand .brand-word {
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
   }
 
   .phase-tabs,
@@ -1200,8 +1214,10 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: 2rem !important;
+    font-size: 2.1rem !important;
     letter-spacing: -0.03em;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
   }
 
   .meta-item {

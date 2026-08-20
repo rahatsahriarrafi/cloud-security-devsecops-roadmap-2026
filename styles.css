@@ -1592,3 +1592,19 @@ tr:last-child td {
     grid-template-columns: 1fr;
   }
 }
+
+.cert-guide-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(12, 107, 92, 0.06);
+  padding: 0.95rem 1.05rem;
+}
+
+.cert-guide-card p {
+  margin: 0 0 0.45rem;
+  color: var(--ink-soft);
+}
+
+.cert-guide-card p:last-child {
+  margin-bottom: 0;
+}

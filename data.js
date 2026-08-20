@@ -292,6 +292,11 @@ window.ROADMAP = {
           "Threat modeling",
           "Risk vocabulary"
         ]
+      },
+      "certGuide": {
+        "certs": "None required · Optional Security+ later if you need a broad baseline",
+        "focus": "CIA, networking, Linux, crypto literacy, OWASP — exam vocab only after labs",
+        "readyWhen": "Secure Baseline Lab Notebook + STRIDE write-up done"
       }
     },
     {
@@ -476,6 +481,11 @@ window.ROADMAP = {
           "Terraform",
           "Logging basics"
         ]
+      },
+      "certGuide": {
+        "certs": "Optional: AWS CCP / AZ-900 / GCP Digital Leader",
+        "focus": "IAM mental model, VPC/VNet, storage, IaC basics, shared responsibility",
+        "readyWhen": "Minimal Secure Landing Zone Terraform repo shipped"
       }
     },
     {
@@ -651,6 +661,11 @@ window.ROADMAP = {
           "KMS/secrets",
           "Evidence"
         ]
+      },
+      "certGuide": {
+        "certs": "Primary: AWS Security Specialty or AZ-500 (or GCP PCSE)",
+        "focus": "IAM federation, KMS/Key Vault, CSPM, logging/evidence, public exposure",
+        "readyWhen": "CSPM Fix-It Challenge remediated + CIS-mapped report"
       }
     },
     {
@@ -800,6 +815,11 @@ window.ROADMAP = {
           "OIDC",
           "Delivery"
         ]
+      },
+      "certGuide": {
+        "certs": "No new cert yet · Optional AZ-400 / AWS DevOps Pro later",
+        "focus": "CI/CD, containers, OIDC to cloud, environments — practice over badges",
+        "readyWhen": "OIDC Deploy Pipeline works with zero static cloud keys"
       }
     },
     {
@@ -972,6 +992,11 @@ window.ROADMAP = {
           "Signing",
           "Policy-as-code"
         ]
+      },
+      "certGuide": {
+        "certs": "Optional Security+ · Prefer portfolio over another badge here",
+        "focus": "SAST/SCA/secrets/IaC gates, SBOM, Sigstore/cosign, PPE threat model",
+        "readyWhen": "Gated Secure SDLC Pipeline green with signature verify"
       }
     },
     {
@@ -1133,6 +1158,11 @@ window.ROADMAP = {
           "Runtime",
           "GitOps"
         ]
+      },
+      "certGuide": {
+        "certs": "CKA then CKS (high ROI for platform roles)",
+        "focus": "RBAC, PSS, NetworkPolicy, admission, runtime (Falco), GitOps trust",
+        "readyWhen": "Hardened GitOps Cluster + Kyverno/Falco playbook"
       }
     },
     {
@@ -1283,6 +1313,11 @@ window.ROADMAP = {
           "Secrets",
           "Zero Trust"
         ]
+      },
+      "certGuide": {
+        "certs": "Covered heavily inside AZ-500 / AWS Security / PCSE · Optional SC-300 (Azure identity)",
+        "focus": "OIDC/OAuth, MFA/CA, JIT admin, Vault/dynamic secrets, NIST 800-207",
+        "readyWhen": "Zero Trust Admin Portal Access lab + architecture brief"
       }
     },
     {
@@ -1423,6 +1458,11 @@ window.ROADMAP = {
           "IR",
           "Automation gates"
         ]
+      },
+      "certGuide": {
+        "certs": "Cloud security cert domains on monitoring/IR · Optional: CompTIA CySA+ / GCFR if SOC-bound",
+        "focus": "ATT&CK for Cloud, detection-as-code, containment, evidence integrity",
+        "readyWhen": "Cloud Detection-as-Code Pack (≥5 rules) + IR runbooks"
       }
     },
     {
@@ -1563,6 +1603,11 @@ window.ROADMAP = {
           "Governance",
           "Platform"
         ]
+      },
+      "certGuide": {
+        "certs": "No rush · Later CCSP for architecture narrative",
+        "focus": "CNAPP/ASPM operating model, AI/LLM security, paved roads, governance",
+        "readyWhen": "CNAPP + AI operating model design doc shipped"
       }
     },
     {
@@ -1678,6 +1723,11 @@ window.ROADMAP = {
           "Documentation",
           "Interview readiness"
         ]
+      },
+      "certGuide": {
+        "certs": "Sit remaining exams on your chosen track · CISSP/CCSP only with experience",
+        "focus": "Resume metrics, STAR stories, public repos pinned to CloudSec Path",
+        "readyWhen": "4 polished projects + cert(s) aligned to target role"
       }
     }
   ],
@@ -1739,7 +1789,7 @@ window.ROADMAP = {
   "certPlan": {
     "title": "Recommended path (best ROI)",
     "rule": "Checkpoint lab / phase project first, then exam. Pick one cloud and stay on that track. Certs prove signal — projects prove skill.",
-    "enoughNote": "The short ROI table alone is not enough for this roadmap. Use the per-phase map, prep focus, and exam-to-project links below so certifications match what you actually study.",
+    "enoughNote": "The short ROI table alone is not enough. This page now includes a full per-phase cert map, exam prep cards, priority order, role→cert→project pairing, and an inline Cert guide inside every phase panel.",
     "roiPath": [
       {
         "stage": "1",

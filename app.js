@@ -334,6 +334,17 @@
       .join("");
 
 
+
+    const certGuideHtml = phase.certGuide
+      ? '<div class="detail-block cert-guide"><h4 class="block-title">Cert guide for this path</h4>' +
+        '<div class="cert-guide-card">' +
+        '<p><strong>Certs:</strong> ' + escapeHtml(phase.certGuide.certs) + '</p>' +
+        '<p><strong>Study focus:</strong> ' + escapeHtml(phase.certGuide.focus) + '</p>' +
+        '<p><strong>Ready when:</strong> ' + escapeHtml(phase.certGuide.readyWhen) + '</p>' +
+        '<p class="project-skills"><a href="#certs">Open full certification plan</a></p>' +
+        "</div></div>"
+      : "";
+
     const projectHtml = phase.project
       ? '<div class="detail-block project-block"><h4 class="block-title">Phase project</h4>' +
         '<div class="project-card"><div class="project-head"><strong>' +
@@ -417,6 +428,7 @@
             "</div>"
         )
         .join("") +
+      certGuideHtml +
       projectHtml +
       section("Labs", phase.labs, true) +
       section("Resources", phase.resources, false) +
@@ -513,8 +525,12 @@
     const enough = document.getElementById("cert-enough");
     if (enough) {
       enough.innerHTML =
-        "<strong>Is the short ROI table enough?</strong> " +
-        escapeHtml(plan.enoughNote || "Use the full phase map and exam prep below.");
+        "<strong>Solved: ROI table is only a summary.</strong> " +
+        escapeHtml(
+          plan.enoughNote ||
+            "Use the full phase cert map, exam prep, and per-phase Cert guide in the curriculum."
+        ) +
+        ' Also open any <a href="#phases">phase</a> for an inline Cert guide tied to that path.';
     }
 
     const roi = document.getElementById("cert-roi-body");

@@ -506,8 +506,16 @@
   function renderCertPlan() {
     const plan = data.certPlan;
     if (!plan) return;
+
     const rule = document.getElementById("cert-rule");
     if (rule) rule.textContent = plan.rule;
+
+    const enough = document.getElementById("cert-enough");
+    if (enough) {
+      enough.innerHTML =
+        "<strong>Is the short ROI table enough?</strong> " +
+        escapeHtml(plan.enoughNote || "Use the full phase map and exam prep below.");
+    }
 
     const roi = document.getElementById("cert-roi-body");
     if (roi) {
@@ -522,6 +530,25 @@
             escapeHtml(r.cert) +
             "</td><td>" +
             escapeHtml(r.why) +
+            "</td></tr>"
+          );
+        })
+        .join("");
+    }
+
+    const phaseBody = document.getElementById("cert-phase-body");
+    if (phaseBody) {
+      phaseBody.innerHTML = (plan.phaseMap || [])
+        .map(function (r) {
+          return (
+            "<tr><td><strong>" +
+            escapeHtml(r.phase) +
+            "</strong></td><td>" +
+            escapeHtml(r.certs) +
+            "</td><td>" +
+            escapeHtml(r.focus) +
+            "</td><td>" +
+            escapeHtml(r.readyWhen) +
             "</td></tr>"
           );
         })
@@ -543,6 +570,42 @@
               .join("") +
             "</ol></article>"
           );
+        })
+        .join("");
+    }
+
+    const prep = document.getElementById("cert-exam-prep");
+    if (prep) {
+      prep.innerHTML = (plan.examPrep || [])
+        .map(function (e) {
+          return (
+            '<article class="exam-card"><div class="project-head"><h3>' +
+            escapeHtml(e.cert) +
+            '</h3><span class="pill teal">' +
+            escapeHtml(e.prepWeeks) +
+            "</span></div><h4 class=\"block-title\">Domains</h4><ul>" +
+            (e.domains || [])
+              .map(function (d) {
+                return "<li>" + escapeHtml(d) + "</li>";
+              })
+              .join("") +
+            '</ul><h4 class="block-title">Study tips</h4><ul>' +
+            (e.studyTips || [])
+              .map(function (d) {
+                return "<li>" + escapeHtml(d) + "</li>";
+              })
+              .join("") +
+            "</ul></article>"
+          );
+        })
+        .join("");
+    }
+
+    const priority = document.getElementById("cert-priority");
+    if (priority) {
+      priority.innerHTML = (plan.priorityOrder || [])
+        .map(function (p) {
+          return "<li>" + escapeHtml(p) + "</li>";
         })
         .join("");
     }
@@ -571,6 +634,8 @@
             escapeHtml(r.role) +
             "</strong></td><td>" +
             escapeHtml(r.certs) +
+            "</td><td>" +
+            escapeHtml(r.projects || "") +
             "</td></tr>"
           );
         })

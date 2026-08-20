@@ -1738,33 +1738,8 @@ window.ROADMAP = {
   ],
   "certPlan": {
     "title": "Recommended path (best ROI)",
-    "rule": "Checkpoint lab first, then exam — never the reverse. Pick one cloud and stay on that track.",
-    "tracks": [
-      {
-        "name": "AWS track",
-        "steps": [
-          "CCP (optional)",
-          "AWS Security Specialty",
-          "CKA → CKS"
-        ]
-      },
-      {
-        "name": "Azure track",
-        "steps": [
-          "AZ-900 (optional)",
-          "AZ-500",
-          "CKA → CKS"
-        ]
-      },
-      {
-        "name": "GCP track",
-        "steps": [
-          "Cloud Digital Leader / ACE (optional)",
-          "Professional Cloud Security Engineer",
-          "CKA → CKS"
-        ]
-      }
-    ],
+    "rule": "Checkpoint lab / phase project first, then exam. Pick one cloud and stay on that track. Certs prove signal — projects prove skill.",
+    "enoughNote": "The short ROI table alone is not enough for this roadmap. Use the per-phase map, prep focus, and exam-to-project links below so certifications match what you actually study.",
     "roiPath": [
       {
         "stage": "1",
@@ -1803,46 +1778,229 @@ window.ROADMAP = {
         "why": "Architecture / senior roles — after real depth"
       }
     ],
+    "tracks": [
+      {
+        "name": "AWS track",
+        "steps": [
+          "CCP (optional) after Phase 1",
+          "AWS Security Specialty after Phase 2 (+ labs)",
+          "CKA → CKS after Phase 5",
+          "Optional: AWS DevOps Professional later if platform-heavy"
+        ]
+      },
+      {
+        "name": "Azure track",
+        "steps": [
+          "AZ-900 (optional) after Phase 1",
+          "AZ-500 after Phase 2 (+ labs)",
+          "CKA → CKS after Phase 5",
+          "Optional: AZ-400 if DevOps/platform-heavy"
+        ]
+      },
+      {
+        "name": "GCP track",
+        "steps": [
+          "Cloud Digital Leader / ACE (optional) after Phase 1",
+          "Professional Cloud Security Engineer after Phase 2–6",
+          "CKA → CKS after Phase 5",
+          "Optional: Professional Cloud DevOps Engineer later"
+        ]
+      }
+    ],
+    "phaseMap": [
+      {
+        "phase": "00 Foundations",
+        "phaseId": "foundations",
+        "certs": "None required · Optional Security+ later if you need a broad baseline",
+        "focus": "CIA, networking, Linux, crypto literacy, OWASP — exam vocab only after labs",
+        "readyWhen": "Secure Baseline Lab Notebook + STRIDE write-up done"
+      },
+      {
+        "phase": "01 Cloud Platform Core",
+        "phaseId": "cloud-core",
+        "certs": "Optional: AWS CCP / AZ-900 / GCP Digital Leader",
+        "focus": "IAM mental model, VPC/VNet, storage, IaC basics, shared responsibility",
+        "readyWhen": "Minimal Secure Landing Zone Terraform repo shipped"
+      },
+      {
+        "phase": "02 Cloud Security Controls",
+        "phaseId": "cloud-security",
+        "certs": "Primary: AWS Security Specialty or AZ-500 (or GCP PCSE)",
+        "focus": "IAM federation, KMS/Key Vault, CSPM, logging/evidence, public exposure",
+        "readyWhen": "CSPM Fix-It Challenge remediated + CIS-mapped report"
+      },
+      {
+        "phase": "03 DevOps Engineering Base",
+        "phaseId": "devops",
+        "certs": "No new cert yet · Optional AZ-400 / AWS DevOps Pro later",
+        "focus": "CI/CD, containers, OIDC to cloud, environments — practice over badges",
+        "readyWhen": "OIDC Deploy Pipeline works with zero static cloud keys"
+      },
+      {
+        "phase": "04 DevSecOps & Pipeline Security",
+        "phaseId": "devsecops",
+        "certs": "Optional Security+ · Prefer portfolio over another badge here",
+        "focus": "SAST/SCA/secrets/IaC gates, SBOM, Sigstore/cosign, PPE threat model",
+        "readyWhen": "Gated Secure SDLC Pipeline green with signature verify"
+      },
+      {
+        "phase": "05 Kubernetes & Container Security",
+        "phaseId": "containers",
+        "certs": "CKA then CKS (high ROI for platform roles)",
+        "focus": "RBAC, PSS, NetworkPolicy, admission, runtime (Falco), GitOps trust",
+        "readyWhen": "Hardened GitOps Cluster + Kyverno/Falco playbook"
+      },
+      {
+        "phase": "06 Identity, Zero Trust & Secrets",
+        "phaseId": "identity",
+        "certs": "Covered heavily inside AZ-500 / AWS Security / PCSE · Optional SC-300 (Azure identity)",
+        "focus": "OIDC/OAuth, MFA/CA, JIT admin, Vault/dynamic secrets, NIST 800-207",
+        "readyWhen": "Zero Trust Admin Portal Access lab + architecture brief"
+      },
+      {
+        "phase": "07 Detection, IR & Cloud SOC",
+        "phaseId": "detection",
+        "certs": "Cloud security cert domains on monitoring/IR · Optional: CompTIA CySA+ / GCFR if SOC-bound",
+        "focus": "ATT&CK for Cloud, detection-as-code, containment, evidence integrity",
+        "readyWhen": "Cloud Detection-as-Code Pack (≥5 rules) + IR runbooks"
+      },
+      {
+        "phase": "08 2026 Advanced Stack",
+        "phaseId": "advanced",
+        "certs": "No rush · Later CCSP for architecture narrative",
+        "focus": "CNAPP/ASPM operating model, AI/LLM security, paved roads, governance",
+        "readyWhen": "CNAPP + AI operating model design doc shipped"
+      },
+      {
+        "phase": "09 Career / Portfolio",
+        "phaseId": "career",
+        "certs": "Sit remaining exams on your chosen track · CISSP/CCSP only with experience",
+        "focus": "Resume metrics, STAR stories, public repos pinned to CloudSec Path",
+        "readyWhen": "4 polished projects + cert(s) aligned to target role"
+      }
+    ],
+    "examPrep": [
+      {
+        "cert": "AWS Security Specialty",
+        "prepWeeks": "4–8 weeks after Phase 2 labs",
+        "domains": [
+          "Incident response",
+          "Logging & monitoring",
+          "Infrastructure security",
+          "Identity & access management",
+          "Data protection"
+        ],
+        "studyTips": [
+          "Practice IAM policy conditions and federation",
+          "Know CloudTrail / Config / GuardDuty / Security Hub workflows",
+          "Lab KMS CMK policies and S3 public access blocks",
+          "Map every wrong answer back to a control you can demo"
+        ]
+      },
+      {
+        "cert": "AZ-500",
+        "prepWeeks": "4–8 weeks after Phase 2 labs",
+        "domains": [
+          "Manage identity & access",
+          "Secure networking",
+          "Secure compute / storage / databases",
+          "Microsoft Defender / Security posture"
+        ],
+        "studyTips": [
+          "Drill Entra ID Conditional Access + Privileged Identity Management",
+          "Practice Key Vault, private endpoints, NSGs",
+          "Know Defender for Cloud recommendations → remediation",
+          "Use your landing zone + CSPM project as the mental model"
+        ]
+      },
+      {
+        "cert": "CKA → CKS",
+        "prepWeeks": "CKA 3–6 weeks · CKS 3–6 weeks after Phase 5 project",
+        "domains": [
+          "CKA: cluster architecture, workloads, networking, storage, troubleshooting",
+          "CKS: cluster setup hardening, PSS, supply chain, runtime, auditing"
+        ],
+        "studyTips": [
+          "Do Killer.sh / similar timed labs — speed matters",
+          "Memorize kubectl + YAML patterns, not PDFs",
+          "Your Hardened GitOps Cluster should mirror CKS tasks",
+          "Pass CKA before booking CKS"
+        ]
+      },
+      {
+        "cert": "GCP Professional Cloud Security Engineer",
+        "prepWeeks": "6–10 weeks spanning Phases 2–6",
+        "domains": [
+          "Configuring access",
+          "Network security",
+          "Data protection",
+          "Security operations",
+          "Compliance assurance"
+        ],
+        "studyTips": [
+          "Practice VPC SC, IAM conditions, Cloud KMS, SCC findings",
+          "Align labs to org policy + private Google access patterns",
+          "Keep a controls matrix like your CSPM project"
+        ]
+      }
+    ],
     "twelveMonth": [
       {
         "months": "1–3",
-        "focus": "Foundations + cloud core → optional CCP / AZ-900"
+        "focus": "Phases 0–1 labs → optional CCP / AZ-900"
       },
       {
         "months": "4–7",
-        "focus": "Cloud security + DevSecOps labs → AWS Security Specialty or AZ-500"
+        "focus": "Phases 2–4 projects → AWS Security Specialty or AZ-500"
       },
       {
         "months": "8–10",
-        "focus": "Kubernetes labs → CKA, then CKS"
+        "focus": "Phase 5 project → CKA then CKS"
       },
       {
         "months": "11–12",
-        "focus": "Portfolio + interviews; only then consider CCSP"
+        "focus": "Phases 6–8 portfolio + interviews; CCSP only if ready"
       }
     ],
     "byRole": [
       {
         "role": "Cloud Security Engineer",
-        "certs": "AWS Security Specialty / AZ-500"
+        "certs": "AWS Security Specialty / AZ-500 / GCP PCSE",
+        "projects": "Landing zone + CSPM Fix-It + detection pack"
       },
       {
         "role": "DevSecOps / Product Security",
-        "certs": "Cloud security cert + pipeline portfolio (CKS helps)"
+        "certs": "Cloud security cert + CKS (helpful)",
+        "projects": "OIDC pipeline + gated SDLC + DevSecOps Factory"
       },
       {
         "role": "Platform Security",
-        "certs": "CKS (+ cloud security cert)"
+        "certs": "CKS (+ cloud security cert)",
+        "projects": "Hardened GitOps Cluster + paved-road modules"
       },
       {
         "role": "Detection / Cloud SOC",
-        "certs": "Cloud security cert + detection-as-code projects"
+        "certs": "Cloud security cert + SOC-adjacent optional",
+        "projects": "CloudSOC Lite + IR tabletops"
+      },
+      {
+        "role": "Security Architect (later)",
+        "certs": "CCSP / CISSP after experience",
+        "projects": "SecureCloud Platform capstone + design docs"
       }
+    ],
+    "priorityOrder": [
+      "1) One cloud security associate/specialty (AWS Sec Spec / AZ-500 / PCSE)",
+      "2) CKA → CKS if targeting K8s/platform/DevSecOps",
+      "3) Portfolio master project (SecureCloud Platform or DevSecOps Factory)",
+      "4) CCSP/CISSP only after 1–2 years of applied depth"
     ],
     "skipEarly": [
       "Do not stack 5 certs with empty GitHub",
       "Do not take CISSP / CCSP before real labs",
-      "Do not chase GIAC first unless your employer pays"
+      "Do not chase GIAC first unless your employer pays",
+      "Do not sit AWS Security Specialty / AZ-500 before Phase 2 project",
+      "Do not book CKS before CKA and a hardened cluster lab"
     ]
   }
 };

@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=12" />
+    <link rel="stylesheet" href="./styles.css?v=13" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -199,6 +199,7 @@
           <p class="section-kicker">Credentials</p>
           <h2 class="section-title">Certification plan</h2>
           <p class="section-lead" id="cert-rule"></p>
+          <div class="callout" id="cert-enough"></div>
 
           <h3 class="block-title">Recommended path (best ROI)</h3>
           <div class="table-wrap">
@@ -215,8 +216,33 @@
             </table>
           </div>
 
+          <h3 class="block-title" style="margin-top:1.5rem">Cert map for every phase</h3>
+          <p class="section-lead">
+            This is what makes the plan match CloudSec Path depth — each phase has a
+            cert signal, study focus, and “ready when” project gate.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Phase</th>
+                  <th scope="col">Certs</th>
+                  <th scope="col">Study focus</th>
+                  <th scope="col">Ready when</th>
+                </tr>
+              </thead>
+              <tbody id="cert-phase-body"></tbody>
+            </table>
+          </div>
+
           <h3 class="block-title" style="margin-top:1.5rem">Pick one cloud track</h3>
           <div class="cert-tracks" id="cert-tracks"></div>
+
+          <h3 class="block-title" style="margin-top:1.5rem">Exam prep (main certs)</h3>
+          <div class="exam-prep-grid" id="cert-exam-prep"></div>
+
+          <h3 class="block-title" style="margin-top:1.5rem">Priority order</h3>
+          <ol class="priority-list" id="cert-priority"></ol>
 
           <h3 class="block-title" style="margin-top:1.5rem">Simple 12-month plan</h3>
           <div class="table-wrap">
@@ -231,13 +257,14 @@
             </table>
           </div>
 
-          <h3 class="block-title" style="margin-top:1.5rem">Match cert to target job</h3>
+          <h3 class="block-title" style="margin-top:1.5rem">Match cert + projects to target job</h3>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
                   <th scope="col">Target role</th>
-                  <th scope="col">Best signal</th>
+                  <th scope="col">Best cert signal</th>
+                  <th scope="col">Projects to ship</th>
                 </tr>
               </thead>
               <tbody id="cert-role-body"></tbody>
@@ -322,7 +349,7 @@
     </footer>
     <button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top"><span aria-hidden="true">↑</span><span class="to-top-label">Top</span></button>
 
-    <script src="./data.js?v=12"></script>
-    <script src="./app.js?v=12"></script>
+    <script src="./data.js?v=13"></script>
+    <script src="./app.js?v=13"></script>
   </body>
 </html>

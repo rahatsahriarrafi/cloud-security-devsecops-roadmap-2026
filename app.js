@@ -58,6 +58,96 @@
     return String(n).padStart(2, "0");
   }
 
+  function parseWeeks(duration) {
+    const d = String(duration || "");
+    if (/parallel/i.test(d)) return { min: 0, max: 0, parallel: true, ongoing: false, label: "Parallel" };
+    if (/ongoing/i.test(d)) {
+      const m = d.match(/(\d+)\s*\+/);
+      const n = m ? Number(m[1]) : 8;
+      return { min: n, max: n + 4, parallel: false, ongoing: true, label: n + "+ weeks" };
+    }
+    const range = d.match(/(\d+)\s*[–\-]\s*(\d+)/);
+    if (range) {
+      return {
+        min: Number(range[1]),
+        max: Number(range[2]),
+        parallel: false,
+        ongoing: false,
+        label: range[1] + "–" + range[2] + " weeks",
+      };
+    }
+    const single = d.match(/(\d+)/);
+    if (single) {
+      const n = Number(single[1]);
+      return { min: n, max: n, parallel: false, ongoing: false, label: n + " weeks" };
+    }
+    return { min: 0, max: 0, parallel: false, ongoing: false, label: d };
+  }
+
+  function buildWeekPlan() {
+    let cursorMin = 1;
+    let cursorMax = 1;
+    let sumMin = 0;
+    let sumMax = 0;
+    return data.phases.map((phase) => {
+      const w = parseWeeks(phase.duration);
+      if (w.parallel) {
+        return {
+          phase: phase,
+          weeks: w,
+          pathStart: null,
+          pathEndMin: null,
+          pathEndMax: null,
+          pathLabel: "Runs in parallel with other phases",
+        };
+      }
+      const start = cursorMin;
+      const endMin = cursorMin + w.min - 1;
+      const endMax = cursorMax + w.max - 1;
+      const entry = {
+        phase: phase,
+        weeks: w,
+        pathStart: start,
+        pathEndMin: endMin,
+        pathEndMax: endMax,
+        pathLabel: w.ongoing
+          ? "Path weeks " + start + "–" + endMax + "+"
+          : "Path weeks " + start + "–" + endMax,
+      };
+      sumMin += w.min;
+      sumMax += w.max;
+      cursorMin = endMin + 1;
+      cursorMax = endMax + 1;
+      return entry;
+    });
+  }
+
+  const weekPlan = buildWeekPlan();
+  const weekById = Object.fromEntries(weekPlan.map((w) => [w.phase.id, w]));
+
+  function renderWeekSummary() {
+    const el = document.getElementById("week-summary");
+    if (!el) return;
+    const countable = weekPlan.filter((w) => !w.weeks.parallel);
+    const sumMin = countable.reduce((s, w) => s + w.weeks.min, 0);
+    const sumMax = countable.reduce((s, w) => s + w.weeks.max, 0);
+    const monthsMin = Math.round((sumMin / 4.3) * 10) / 10;
+    const monthsMax = Math.round((sumMax / 4.3) * 10) / 10;
+    el.innerHTML =
+      '<div class="week-summary-card"><strong>' +
+      sumMin +
+      "–" +
+      sumMax +
+      ' weeks</strong><span>full path (phases 0–8)</span></div>' +
+      '<div class="week-summary-card"><strong>~' +
+      monthsMin +
+      "–" +
+      monthsMax +
+      ' months</strong><span>full-time equivalent estimate</span></div>' +
+      '<div class="week-summary-card"><strong>Career track</strong><span>parallel — not added to week total</span></div>';
+  }
+
+
   function activeIndex() {
     return data.phases.findIndex((p) => p.id === activeId);
   }
@@ -139,6 +229,12 @@
       btn.type = "button";
       btn.className = "phase-row" + (phase.id === activeId ? " active" : "");
       btn.setAttribute("aria-current", phase.id === activeId ? "true" : "false");
+      const wk = weekById[phase.id];
+      const weekText = wk
+        ? wk.weeks.parallel
+          ? "Parallel track"
+          : escapeHtml(wk.weeks.label) + " · " + escapeHtml(wk.pathLabel)
+        : escapeHtml(phase.duration);
       btn.innerHTML =
         '<span class="num">' +
         padOrder(phase.order) +
@@ -146,7 +242,7 @@
         escapeHtml(phase.title) +
         (done ? ' <span class="done-tag">done</span>' : "") +
         '</span><span class="dur">' +
-        escapeHtml(phase.duration) +
+        weekText +
         '</span><span class="check">' +
         escapeHtml(truncate(phase.checkpoint, 72)) +
         "</span>";
@@ -260,7 +356,17 @@
       escapeHtml(phase.title) +
       '</h3><div class="phase-meta"><span class="pill teal">' +
       escapeHtml(phase.duration) +
-      '</span><span class="pill">Expanded detail</span>' +
+      '</span>' +
+      (weekById[phase.id]
+        ? '<span class="pill weeks-pill">' +
+          escapeHtml(
+            weekById[phase.id].weeks.parallel
+              ? "Parallel track"
+              : weekById[phase.id].pathLabel
+          ) +
+          "</span>"
+        : "") +
+      '<span class="pill">Expanded detail</span>' +
       (done
         ? '<span class="pill done-pill">Completed</span>'
         : '<span class="pill">In progress</span>') +
@@ -392,11 +498,30 @@
     });
   }
 
+  const searchForm = document.getElementById("search-form");
+  const searchBtn = document.getElementById("search-btn");
+  const searchClear = document.getElementById("search-clear");
+
+  function applySearch(q) {
+    searchQuery = (q || "").trim();
+    if (searchEl && searchEl.value !== searchQuery) searchEl.value = searchQuery;
+    if (searchClear) searchClear.hidden = !searchQuery;
+    renderMap();
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      applySearch(searchEl ? searchEl.value : "");
+    });
+  }
   if (searchEl) {
     searchEl.addEventListener("input", () => {
-      searchQuery = searchEl.value;
-      renderMap();
+      if (!searchEl.value.trim()) applySearch("");
     });
+  }
+  if (searchClear) {
+    searchClear.addEventListener("click", () => applySearch(""));
   }
 
   if (toTop) {

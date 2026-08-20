@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=6" />
+    <link rel="stylesheet" href="./styles.css?v=7" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -89,9 +89,14 @@
             Skip early phases only if you can already pass their checkpoints.
             Experienced DevOps engineers often enter at Phase 2–4.
           </div>
+          <div class="week-summary" id="week-summary" aria-live="polite"></div>
           <div class="map-controls">
-            <label class="sr-only" for="phase-search">Search phases</label>
-            <input id="phase-search" type="search" placeholder="Search phases, topics, tools…" autocomplete="off" />
+            <form class="search-form" id="search-form" role="search">
+              <label class="sr-only" for="phase-search">Search phases</label>
+              <input id="phase-search" type="search" placeholder="Search phases, topics, tools…" autocomplete="off" />
+              <button type="submit" class="btn btn-primary search-btn" id="search-btn">Search</button>
+              <button type="button" class="btn btn-ghost search-btn" id="search-clear" hidden>Clear</button>
+            </form>
             <div class="progress-bar-wrap" aria-live="polite">
               <div class="progress-label"><span>Your progress</span> <strong id="progress-text">0 / 10</strong></div>
               <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -240,7 +245,7 @@
     </footer>
     <button type="button" class="to-top" id="to-top" aria-label="Back to top" title="Back to top"><span aria-hidden="true">↑</span><span class="to-top-label">Top</span></button>
 
-    <script src="./data.js?v=6"></script>
-    <script src="./app.js?v=6"></script>
+    <script src="./data.js?v=7"></script>
+    <script src="./app.js?v=7"></script>
   </body>
 </html>

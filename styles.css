@@ -270,6 +270,8 @@ section,
 .hero-copy {
   max-width: 100%;
   min-width: 0;
+  width: 100%;
+  overflow: hidden; /* contain auto-fit brand */
 }
 
 .hero-brand {
@@ -279,13 +281,14 @@ section,
   gap: 0.22em;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.15rem, 7.8vw, 5.75rem);
+  font-size: var(--hero-brand-size, clamp(2.15rem, 7.8vw, 5.75rem));
   line-height: 0.98;
   letter-spacing: -0.05em;
   margin: 0 0 1.1rem;
   color: var(--ink);
   animation: rise 0.9s ease both;
   max-width: 100%;
+  width: max-content;
   min-width: 0;
   word-break: normal;
   overflow-wrap: normal;
@@ -979,18 +982,39 @@ tr:last-child td {
   .hero-brand {
     display: flex;
     flex-wrap: nowrap;
-    font-size: clamp(2rem, 9vw, 3.4rem);
+    font-size: var(--hero-brand-size, clamp(1.75rem, 9vw, 3.4rem));
     word-break: normal;
     overflow-wrap: normal;
   }
 
   .hero-headline {
     max-width: none;
+    font-size: clamp(1.1rem, 4.6vw, 1.45rem);
   }
 
   .hero-support {
     max-width: none;
-    font-size: 1rem;
+    font-size: 0.98rem;
+    overflow-wrap: anywhere;
+  }
+
+  .meta-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    margin-top: 1.75rem;
+  }
+
+  .meta-item {
+    min-width: 0;
+  }
+
+  .meta-item strong {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    overflow-wrap: anywhere;
+  }
+
+  .meta-item span {
+    overflow-wrap: anywhere;
   }
 
   .cta-row {
@@ -1002,11 +1026,6 @@ tr:last-child td {
     justify-content: center;
     width: 100%;
     min-height: 48px;
-  }
-
-  .meta-strip {
-    grid-template-columns: 1fr 1fr;
-    margin-top: 1.75rem;
   }
 
   section {
@@ -1180,7 +1199,7 @@ tr:last-child td {
   }
 
   .hero-brand {
-    font-size: clamp(2rem, 8.5vw, 3.6rem);
+    font-size: var(--hero-brand-size, clamp(2rem, 8.5vw, 3.6rem));
   }
 
   .callout {
@@ -1383,7 +1402,7 @@ tr:last-child td {
   .hero-brand {
     display: flex !important;
     flex-wrap: nowrap !important;
-    font-size: clamp(1.85rem, 8.5vw, 2.35rem) !important;
+    font-size: var(--hero-brand-size, clamp(1.5rem, 8vw, 2.2rem)) !important;
     letter-spacing: -0.04em;
     word-break: normal !important;
     overflow-wrap: normal !important;

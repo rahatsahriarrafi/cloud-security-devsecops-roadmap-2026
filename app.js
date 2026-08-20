@@ -808,6 +808,44 @@
     });
   }
 
+  /* Auto-shrink hero title so "CloudSec Path" never overflows on phones */
+  function fitHeroBrand() {
+    const brand = document.querySelector(".hero-brand");
+    const box = document.querySelector(".hero-copy");
+    if (!brand || !box) return;
+
+    brand.style.removeProperty("--hero-brand-size");
+
+    const available = Math.floor(box.clientWidth);
+    if (available <= 0) return;
+
+    // Start from CSS-computed size, then shrink until it fits.
+    let size = parseFloat(window.getComputedStyle(brand).fontSize);
+    if (!size || size < 12) size = 34;
+
+    const min = 14;
+    let guard = 80;
+    brand.style.setProperty("--hero-brand-size", size + "px");
+
+    while (brand.scrollWidth > available && size > min && guard--) {
+      size -= 0.5;
+      brand.style.setProperty("--hero-brand-size", size + "px");
+    }
+  }
+
+  let fitTimer = null;
+  function scheduleFitHeroBrand() {
+    window.clearTimeout(fitTimer);
+    fitTimer = window.setTimeout(fitHeroBrand, 50);
+  }
+
+  fitHeroBrand();
+  window.addEventListener("resize", scheduleFitHeroBrand);
+  window.addEventListener("orientationchange", scheduleFitHeroBrand);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitHeroBrand).catch(function () {});
+  }
+
   updateProgress();
   renderWeekSummary();
   setActive(activeId, false);

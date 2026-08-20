@@ -3,7 +3,7 @@ window.ROADMAP = {
     "brand": "CloudSec Path",
     "year": "2026",
     "tagline": "A lab-first route from foundations to CNAPP, supply chain, and AI-system security.",
-    "duration": "12–18 months FTE",
+    "duration": "14–18 months FTE",
     "phases": 10,
     "detailLevel": "expanded"
   },

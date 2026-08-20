@@ -124,6 +124,28 @@
     nextBtn.disabled = idx >= data.phases.length - 1;
 
     panelEl.setAttribute("aria-labelledby", "tab-" + phase.id);
+
+    const weekHtml = (phase.weekPlan || [])
+      .map(
+        (w) =>
+          '<div class="week-card"><div class="week-head"><strong>' +
+          escapeHtml(w.week) +
+          '</strong><span>' +
+          escapeHtml(w.focus) +
+          "</span></div>" +
+          listHtml(w.tasks) +
+          "</div>"
+      )
+      .join("");
+
+    const section = (title, items, ordered) => {
+      if (!items || !items.length) return "";
+      const body = ordered
+        ? "<ol>" + items.map((i) => "<li>" + escapeHtml(i) + "</li>").join("") + "</ol>"
+        : listHtml(items);
+      return '<div class="detail-block"><h4 class="block-title">' + title + "</h4>" + body + "</div>";
+    };
+
     panelEl.innerHTML =
       "<h3>Phase " +
       phase.order +
@@ -131,7 +153,7 @@
       escapeHtml(phase.title) +
       '</h3><div class="phase-meta"><span class="pill teal">' +
       escapeHtml(phase.duration) +
-      '</span><span class="pill">Checkpoint required</span></div><p class="phase-goal">' +
+      '</span><span class="pill">Expanded detail</span><span class="pill">Checkpoint required</span></div><p class="phase-goal">' +
       escapeHtml(phase.goal) +
       '</p><div class="grid-3"><div class="mini-block"><h4>Outcomes</h4>' +
       listHtml(phase.outcomes) +
@@ -139,22 +161,29 @@
       listHtml(phase.tools) +
       '</div><div class="mini-block"><h4>Checkpoint</h4><ul><li>' +
       escapeHtml(phase.checkpoint) +
-      "</li></ul></div></div><h4 class=\"block-title\">Topics</h4>" +
+      "</li></ul></div></div>" +
+      (weekHtml
+        ? '<h4 class="block-title">Week-by-week plan</h4><div class="week-grid">' +
+          weekHtml +
+          "</div>"
+        : "") +
+      '<h4 class="block-title">Topics in depth</h4>' +
       phase.topics
         .map(
-          (t) =>
+          (topic) =>
             '<div class="topic"><div class="topic-head"><h4>' +
-            escapeHtml(t.title) +
+            escapeHtml(topic.title) +
             '</h4><span class="pill">' +
-            escapeHtml(t.depth) +
+            escapeHtml(topic.depth) +
             "</span></div>" +
-            listHtml(t.items) +
+            listHtml(topic.items) +
             "</div>"
         )
         .join("") +
-      '<div class="labs"><h4 class="block-title">Labs</h4><ol>' +
-      phase.labs.map((l) => "<li>" + escapeHtml(l) + "</li>").join("") +
-      "</ol></div>";
+      section("Labs", phase.labs, true) +
+      section("Resources", phase.resources, false) +
+      section("Common mistakes", phase.mistakes, false) +
+      section("Interview prompts", phase.interview, true);
   }
 
   function setActive(id, scrollToPanel) {

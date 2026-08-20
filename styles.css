@@ -656,6 +656,56 @@ tr:last-child td {
   font-size: 0.92rem;
 }
 
+.author-section {
+  padding-top: 2.5rem;
+}
+
+.author-card {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.4rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 2px);
+}
+
+.author-photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  background: var(--sand);
+}
+
+.author-name {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem;
+}
+
+.author-role {
+  margin: 0 0 0.75rem;
+  color: var(--teal-deep);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.author-bio {
+  margin: 0 0 1.1rem;
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+
+.author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .footer {
   border-top: 1px solid var(--line);
   padding: 2rem 0 2.75rem;
@@ -761,6 +811,16 @@ tr:last-child td {
   .phase-nav-bar .btn {
     flex: 1;
     justify-content: center;
+  }
+
+  .author-card {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .author-photo {
+    width: 120px;
+    height: 120px;
   }
 }
 

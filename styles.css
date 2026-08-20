@@ -238,15 +238,17 @@ section,
   color: var(--teal-deep);
 }
 
-/* Hero */
+/* Hero — fill first screen so Phase map starts on the next page */
 .hero {
   position: relative;
   overflow: hidden; /* clip background pattern only; title must fit inside */
-  min-height: min(84vh, 760px);
+  min-height: calc(100svh - 3.75rem);
+  min-height: calc(100dvh - 3.75rem);
   display: grid;
   align-items: center;
   padding: 2.25rem 0 2.75rem;
   isolation: isolate;
+  box-sizing: border-box;
 }
 
 .hero-visual {
@@ -414,6 +416,18 @@ section,
 
 section {
   padding: 3.5rem 0;
+}
+
+.hero-page-gap {
+  display: block;
+  height: 2.5rem;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+#map {
+  padding-top: 4.25rem;
+  scroll-margin-top: 4.75rem;
 }
 
 .section-kicker {
@@ -956,7 +970,8 @@ tr:last-child td {
   }
 
   .hero {
-    min-height: auto;
+    min-height: calc(100svh - 3.75rem);
+    min-height: calc(100dvh - 3.75rem);
     padding: 2.5rem 0 2.25rem;
     align-items: start;
   }

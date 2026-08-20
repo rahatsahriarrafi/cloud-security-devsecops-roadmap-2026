@@ -127,7 +127,9 @@
         "aria-label",
         (done ? "Unmark " : "Mark ") + phase.title + " complete"
       );
-      check.textContent = done ? "\u2713" : "";
+      check.innerHTML = done
+        ? '<span aria-hidden="true">' + String.fromCharCode(0x2713) + '</span>'
+        : '<span class="phase-check-box" aria-hidden="true"></span>';
       check.addEventListener("click", (e) => {
         e.stopPropagation();
         toggleDone(phase.id);
@@ -167,7 +169,7 @@
       btn.setAttribute("aria-selected", phase.id === activeId ? "true" : "false");
       btn.setAttribute("aria-controls", "phase-panel");
       btn.tabIndex = phase.id === activeId ? 0 : -1;
-      const mark = doneIds.includes(phase.id) ? " · done" : "";
+      const mark = doneIds.includes(phase.id) ? " ï¿½ done" : "";
       btn.innerHTML =
         "Phase " +
         phase.order +

@@ -66,14 +66,14 @@
       const n = m ? Number(m[1]) : 8;
       return { min: n, max: n + 4, parallel: false, ongoing: true, label: n + "+ weeks" };
     }
-    const range = d.match(/(\d+)\s*[–—\-]\s*(\d+)/);
+    const range = d.match(/(\d+)\s*[\u2013\u2014\-]\s*(\d+)/);
     if (range) {
       return {
         min: Number(range[1]),
         max: Number(range[2]),
         parallel: false,
         ongoing: false,
-        label: range[1] + "–" + range[2] + " weeks",
+        label: range[1] + "-" + range[2] + " weeks",
       };
     }
     const single = d.match(/(\d+)/);
@@ -111,8 +111,8 @@
         pathEndMin: endMin,
         pathEndMax: endMax,
         pathLabel: w.ongoing
-          ? "Path weeks " + start + "–" + endMax + "+"
-          : "Path weeks " + start + "–" + endMax,
+          ? "Path weeks " + start + "-" + endMax + "+"
+          : "Path weeks " + start + "-" + endMax,
       };
       sumMin += w.min;
       sumMax += w.max;
@@ -136,15 +136,15 @@
     el.innerHTML =
       '<div class="week-summary-card"><strong>' +
       sumMin +
-      "–" +
+      "-" +
       sumMax +
-      ' weeks</strong><span>full path (phases 0–8)</span></div>' +
+      ' weeks</strong><span>full path (phases 0-8)</span></div>' +
       '<div class="week-summary-card"><strong>~' +
       monthsMin +
-      "–" +
+      "-" +
       monthsMax +
       ' months</strong><span>full-time equivalent estimate</span></div>' +
-      '<div class="week-summary-card"><strong>Career track</strong><span>parallel — not added to week total</span></div>';
+      '<div class="week-summary-card"><strong>Career track</strong><span>parallel - not added to week total</span></div>';
   }
 
 
@@ -265,7 +265,7 @@
       btn.setAttribute("aria-selected", phase.id === activeId ? "true" : "false");
       btn.setAttribute("aria-controls", "phase-panel");
       btn.tabIndex = phase.id === activeId ? 0 : -1;
-      const mark = doneIds.includes(phase.id) ? " · done" : "";
+      const mark = doneIds.includes(phase.id) ? " * done" : "";
       btn.innerHTML =
         "Phase " +
         phase.order +

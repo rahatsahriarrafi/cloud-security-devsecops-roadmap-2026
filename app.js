@@ -233,7 +233,7 @@
       const weekText = wk
         ? wk.weeks.parallel
           ? "Parallel track"
-          : escapeHtml(wk.weeks.label) + " · " + escapeHtml(wk.pathLabel)
+          : escapeHtml(wk.weeks.label) + " | " + escapeHtml(wk.pathLabel)
         : escapeHtml(phase.duration);
       btn.innerHTML =
         '<span class="num">' +
@@ -265,7 +265,7 @@
       btn.setAttribute("aria-selected", phase.id === activeId ? "true" : "false");
       btn.setAttribute("aria-controls", "phase-panel");
       btn.tabIndex = phase.id === activeId ? 0 : -1;
-      const mark = doneIds.includes(phase.id) ? " � done" : "";
+      const mark = doneIds.includes(phase.id) ? " · done" : "";
       btn.innerHTML =
         "Phase " +
         phase.order +
@@ -332,6 +332,22 @@
           "</div>"
       )
       .join("");
+
+
+    const projectHtml = phase.project
+      ? '<div class="detail-block project-block"><h4 class="block-title">Phase project</h4>' +
+        '<div class="project-card"><div class="project-head"><strong>' +
+        escapeHtml(phase.project.name) +
+        '</strong><span class="pill teal">' +
+        escapeHtml(phase.project.level) +
+        '</span></div><p class="project-deliv"><strong>Deliverable:</strong> ' +
+        escapeHtml(phase.project.deliverable) +
+        "</p>" +
+        listHtml(phase.project.build) +
+        '<p class="project-skills"><strong>Skills proof:</strong> ' +
+        escapeHtml((phase.project.skills || []).join(" | ")) +
+        "</p></div></div>"
+      : "";
 
     const section = (title, items, ordered) => {
       if (!items || !items.length) return "";
@@ -401,6 +417,7 @@
             "</div>"
         )
         .join("") +
+      projectHtml +
       section("Labs", phase.labs, true) +
       section("Resources", phase.resources, false) +
       section("Common mistakes", phase.mistakes, false) +
@@ -431,6 +448,58 @@
     if (scrollToPanel) {
       document.getElementById("phases").scrollIntoView({ behavior: "smooth" });
     }
+  }
+
+
+  function renderMasterProjects() {
+    const el = document.getElementById("master-projects");
+    if (!el || !data.masterProjects) return;
+    el.innerHTML = data.masterProjects
+      .map(function (mp) {
+        return (
+          '<article class="master-card">' +
+          '<div class="project-head"><h3>' +
+          escapeHtml(mp.name) +
+          '</h3><span class="pill teal">' +
+          escapeHtml(mp.duration) +
+          "</span></div><p class=\"phase-goal\">" +
+          escapeHtml(mp.goal) +
+          "</p><h4 class=\"block-title\">Build</h4>" +
+          listHtml(mp.includes) +
+          '<p class="project-deliv"><strong>Demo:</strong> ' +
+          escapeHtml(mp.demo) +
+          "</p></article>"
+        );
+      })
+      .join("");
+  }
+
+  function renderPhaseProjectIndex() {
+    const el = document.getElementById("phase-projects");
+    if (!el) return;
+    el.innerHTML = data.phases
+      .map(function (phase) {
+        if (!phase.project) return "";
+        return (
+          '<button type="button" class="phase-project-row" data-phase="' +
+          escapeHtml(phase.id) +
+          '"><span class="num">' +
+          padOrder(phase.order) +
+          "</span><span><strong>" +
+          escapeHtml(phase.project.name) +
+          "</strong><small>" +
+          escapeHtml(phase.title) +
+          " | " +
+          escapeHtml(phase.project.level) +
+          "</small></span></button>"
+        );
+      })
+      .join("");
+    el.querySelectorAll("[data-phase]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setActive(btn.getAttribute("data-phase"), true);
+      });
+    });
   }
 
   function renderTrends() {

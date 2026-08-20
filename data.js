@@ -275,7 +275,24 @@ window.ROADMAP = {
         "How would you store passwords? Why not encrypt them with AES?",
         "Give one preventive and one detective control for SSH brute force."
       ],
-      "checkpoint": "Deliver a 1–2 page shared-responsibility + STRIDE threat model for a sample SaaS, plus lab notes from hardened Linux and TLS labs."
+      "checkpoint": "Deliver a 1–2 page shared-responsibility + STRIDE threat model for a sample SaaS, plus lab notes from hardened Linux and TLS labs.",
+      "project": {
+        "name": "Secure Baseline Lab Notebook",
+        "level": "Starter",
+        "build": [
+          "Hardened Linux VM with SSH key-only + UFW notes",
+          "TLS cert lab write-up (CSR, chain, openssl checks)",
+          "1–2 page STRIDE threat model for a 3-tier SaaS",
+          "Shared-responsibility matrix (IaaS/PaaS/SaaS)"
+        ],
+        "deliverable": "GitHub repo: /labs + /threat-model.md + screenshots",
+        "skills": [
+          "Linux",
+          "TLS",
+          "Threat modeling",
+          "Risk vocabulary"
+        ]
+      }
     },
     {
       "id": "cloud-core",
@@ -442,7 +459,24 @@ window.ROADMAP = {
         "What is in CloudTrail/Activity Log and why must it be immutable?",
         "How do you prevent a developer account from disabling logging? (org policy / SCP idea)"
       ],
-      "checkpoint": "Architecture diagram + Terraform/OpenTofu repo for a minimal secure landing zone, with logging enabled and a short README of control decisions."
+      "checkpoint": "Architecture diagram + Terraform/OpenTofu repo for a minimal secure landing zone, with logging enabled and a short README of control decisions.",
+      "project": {
+        "name": "Minimal Secure Landing Zone",
+        "level": "Core",
+        "build": [
+          "Terraform/OpenTofu VPC/VNet: public web, private app, private DB",
+          "No public DB; SSM/OS Login only (no open SSH)",
+          "Remote state + locking; module for network + app role",
+          "Org/account CloudTrail or Activity Log enabled + sample query"
+        ],
+        "deliverable": "IaC repo + architecture diagram + README control decisions",
+        "skills": [
+          "Cloud networking",
+          "IAM roles",
+          "Terraform",
+          "Logging basics"
+        ]
+      }
     },
     {
       "id": "cloud-security",
@@ -600,7 +634,24 @@ window.ROADMAP = {
         "What is a toxic IAM combination? Give an example.",
         "How would you prove to an auditor that root/MFA and CloudTrail are enforced?"
       ],
-      "checkpoint": "Pass a mock CSPM audit on your lab: zero Critical public exposures, MFA on privileged identities, immutable logging path documented."
+      "checkpoint": "Pass a mock CSPM audit on your lab: zero Critical public exposures, MFA on privileged identities, immutable logging path documented.",
+      "project": {
+        "name": "CSPM Fix-It Challenge",
+        "level": "Core",
+        "build": [
+          "Intentionally broken lab account (public bucket, open SG, wild IAM)",
+          "Scan with Prowler/Scout + native Security Hub/Defender",
+          "Remediate Criticals; CMK encryption + secret rotation drill",
+          "Before/after report mapped to CIS controls"
+        ],
+        "deliverable": "Remediation PR series + audit checklist PDF/MD",
+        "skills": [
+          "IAM least privilege",
+          "CSPM",
+          "KMS/secrets",
+          "Evidence"
+        ]
+      }
     },
     {
       "id": "devops",
@@ -732,7 +783,24 @@ window.ROADMAP = {
         "Compare GitOps and traditional CD pipelines.",
         "How do you prevent a compromised CI from deploying to prod?"
       ],
-      "checkpoint": "Working CI/CD repo with OIDC cloud deploy, non-root image, environment approvals, and a short delivery README — no long-lived cloud keys."
+      "checkpoint": "Working CI/CD repo with OIDC cloud deploy, non-root image, environment approvals, and a short delivery README — no long-lived cloud keys.",
+      "project": {
+        "name": "OIDC Deploy Pipeline",
+        "level": "Core",
+        "build": [
+          "Sample API in Docker (non-root, multi-stage)",
+          "GitHub Actions/GitLab CI: test → build → push private registry",
+          "Cloud deploy via OIDC only (delete static keys)",
+          "Staging auto + prod approval gate + rollback note"
+        ],
+        "deliverable": "Working CI/CD repo with environment protections",
+        "skills": [
+          "CI/CD",
+          "Containers",
+          "OIDC",
+          "Delivery"
+        ]
+      }
     },
     {
       "id": "devsecops",
@@ -887,7 +955,24 @@ window.ROADMAP = {
         "How do you prevent a malicious PR from stealing cloud OIDC tokens?",
         "Explain SBOM vs attestation vs signature."
       ],
-      "checkpoint": "Documented pipeline threat model + green gated pipeline on a demo app with SBOM, signature verification, and waiver policy."
+      "checkpoint": "Documented pipeline threat model + green gated pipeline on a demo app with SBOM, signature verification, and waiver policy.",
+      "project": {
+        "name": "Gated Secure SDLC Pipeline",
+        "level": "Advanced",
+        "build": [
+          "Add gitleaks + Semgrep/CodeQL + Trivy SCA + Checkov",
+          "Generate SBOM (Syft/CycloneDX); cosign sign image",
+          "Verify signature before deploy; Critical CVE gate + waiver file",
+          "1-page pipeline threat model (PPE / supply chain)"
+        ],
+        "deliverable": "Green gated pipeline + POLICY.md + attestations",
+        "skills": [
+          "SAST/SCA",
+          "SBOM",
+          "Signing",
+          "Policy-as-code"
+        ]
+      }
     },
     {
       "id": "containers",
@@ -1031,7 +1116,24 @@ window.ROADMAP = {
         "Default-deny NetworkPolicy broke DNS — how do you fix it safely?",
         "How do you trust Argo CD if Git is compromised?"
       ],
-      "checkpoint": "Hardened demo cluster + policy pack + runtime alert playbook + short architecture note on GitOps trust."
+      "checkpoint": "Hardened demo cluster + policy pack + runtime alert playbook + short architecture note on GitOps trust.",
+      "project": {
+        "name": "Hardened GitOps Cluster",
+        "level": "Advanced",
+        "build": [
+          "kind/k3d cluster with PSS restricted + default-deny NetworkPolicy",
+          "Kyverno policies: non-root, drop caps, block :latest",
+          "Falco rule + triage playbook for shell-in-container",
+          "Argo CD/Flux deploy from dedicated GitOps repo"
+        ],
+        "deliverable": "k8s-security repo: manifests, policies, runbook",
+        "skills": [
+          "K8s RBAC",
+          "Admission",
+          "Runtime",
+          "GitOps"
+        ]
+      }
     },
     {
       "id": "identity",
@@ -1164,7 +1266,24 @@ window.ROADMAP = {
         "Design JIT cloud admin for 20 engineers.",
         "Where should microservice credentials come from at runtime?"
       ],
-      "checkpoint": "Architecture brief: Zero Trust access to a private admin UI, plus working OIDC app and workload identity lab evidence."
+      "checkpoint": "Architecture brief: Zero Trust access to a private admin UI, plus working OIDC app and workload identity lab evidence.",
+      "project": {
+        "name": "Zero Trust Admin Portal Access",
+        "level": "Advanced",
+        "build": [
+          "Demo app protected with OIDC + MFA at IdP",
+          "CI and runtime use workload identity (no static keys)",
+          "Vault/cloud SM dynamic DB creds with short TTL",
+          "Architecture brief: ZTNA vs VPN for contractor admin UI"
+        ],
+        "deliverable": "identity-lab repo + ZT architecture one-pager",
+        "skills": [
+          "OIDC/OAuth",
+          "MFA/CA",
+          "Secrets",
+          "Zero Trust"
+        ]
+      }
     },
     {
       "id": "detection",
@@ -1287,7 +1406,24 @@ window.ROADMAP = {
         "Give two high-signal detections for ransomware in cloud storage.",
         "How would you measure detection engineering success?"
       ],
-      "checkpoint": "Detection-as-code repo with ≥5 high-signal cloud rules, ATT&CK map, and IR runbooks for key compromise and storage ransomware."
+      "checkpoint": "Detection-as-code repo with ≥5 high-signal cloud rules, ATT&CK map, and IR runbooks for key compromise and storage ransomware.",
+      "project": {
+        "name": "Cloud Detection-as-Code Pack",
+        "level": "Advanced",
+        "build": [
+          "Centralize control-plane + identity logs for lab",
+          "≥5 high-signal detections (key abuse, public policy change, mining)",
+          "ATT&CK mapping table; alert → ticket fields",
+          "IR runbooks: access-key compromise + storage ransomware tabletop"
+        ],
+        "deliverable": "detections/ repo with queries + runbooks + coverage map",
+        "skills": [
+          "SIEM queries",
+          "ATT&CK",
+          "IR",
+          "Automation gates"
+        ]
+      }
     },
     {
       "id": "advanced",
@@ -1410,7 +1546,24 @@ window.ROADMAP = {
         "Threat-model a RAG chatbot with access to HR PDFs.",
         "Describe a paved road for secure microservice onboarding."
       ],
-      "checkpoint": "Senior-style design doc: CNAPP + ASPM operating model for a mid-size org, plus AI app threat model and paved-road RFC."
+      "checkpoint": "Senior-style design doc: CNAPP + ASPM operating model for a mid-size org, plus AI app threat model and paved-road RFC.",
+      "project": {
+        "name": "CNAPP + AI App Security Operating Model",
+        "level": "Senior",
+        "build": [
+          "Inventory lab assets into an attack-path narrative",
+          "Threat-model a RAG chatbot with tools; add 5 guardrails",
+          "Org AI usage policy draft (data classes, approved tools)",
+          "Paved-road RFC: secure Terraform module + CI template"
+        ],
+        "deliverable": "design-docs/ CNAPP-ASPM model + AI threat model",
+        "skills": [
+          "CNAPP/ASPM",
+          "LLM security",
+          "Governance",
+          "Platform"
+        ]
+      }
     },
     {
       "id": "career",
@@ -1509,7 +1662,78 @@ window.ROADMAP = {
         "How do you prioritize a backlog of 500 scanner findings?",
         "Where are you weaker on this roadmap and what is your plan?"
       ],
-      "checkpoint": "Resume bullets tied to measurable outcomes (MTTD, criticals closed, coverage %) + 4 public projects + live CloudSec Path site in profile."
+      "checkpoint": "Resume bullets tied to measurable outcomes (MTTD, criticals closed, coverage %) + 4 public projects + live CloudSec Path site in profile.",
+      "project": {
+        "name": "Public Portfolio Launch",
+        "level": "Career",
+        "build": [
+          "Polish READMEs for 4 best phase projects",
+          "Pin repos + live CloudSec Path site on GitHub profile",
+          "Write 2 interview STAR stories from your labs",
+          "Optional: contribute one Semgrep/Kyverno rule with tests"
+        ],
+        "deliverable": "Portfolio index page + resume bullets with metrics",
+        "skills": [
+          "Storytelling",
+          "Documentation",
+          "Interview readiness"
+        ]
+      }
+    }
+  ],
+  "masterProjects": [
+    {
+      "name": "SecureCloud Platform (Capstone)",
+      "duration": "6–10 weeks",
+      "goal": "End-to-end mini company platform: landing zone + app + pipeline + K8s + identity + detections.",
+      "includes": [
+        "Multi-account/folder landing zone (Terraform) with SCP/Policy baselines",
+        "Sample microservice on hardened Kubernetes (PSS, NetworkPolicy, Kyverno)",
+        "Full DevSecOps pipeline: SAST/SCA/secrets/IaC + SBOM + cosign verify",
+        "OIDC everywhere (CI + workload identity); break-glass documented",
+        "Detection pack + IR runbooks wired to native findings",
+        "Executive one-pager: risks, coverage, residual risk"
+      ],
+      "demo": "Live diagram walkthrough + failed/blocked pipeline demo + one simulated incident timeline"
+    },
+    {
+      "name": "DevSecOps Factory",
+      "duration": "4–6 weeks",
+      "goal": "Reusable paved road other teams can copy — golden templates, not a one-off app.",
+      "includes": [
+        "Terraform module library (VPC, IAM role, private storage) with Checkov CI",
+        "Reusable GitHub Actions/GitLab workflows pinned by SHA",
+        "Policy pack (OPA/Conftest or Kyverno) with unit tests",
+        "Developer README: how to onboard a new service in <1 day",
+        "Waiver process with expiry + owner fields"
+      ],
+      "demo": "Onboard a second dummy service using only the paved road"
+    },
+    {
+      "name": "CloudSOC Lite",
+      "duration": "4–6 weeks",
+      "goal": "Small but real detection engineering portfolio for Cloud SOC / detection roles.",
+      "includes": [
+        "Log lake/SIEM queries for identity + data exfil patterns",
+        "10 detections as code with ATT&CK tags",
+        "SOAR-style enrichment playbook (human gate on revoke)",
+        "Tabletop package: ransomware on object storage",
+        "MTTD/MTTR measurement notes from your drills"
+      ],
+      "demo": "Inject noisy IAM key activity and show detection → ticket → containment decision"
+    },
+    {
+      "name": "AI Guardrails Lab",
+      "duration": "3–5 weeks",
+      "goal": "Secure an internal LLM/RAG assistant — strong 2026 differentiator.",
+      "includes": [
+        "Minimal RAG app with auth and corpus access control",
+        "Threat model: prompt injection, data leak, tool abuse",
+        "Guardrails: input/output filters, allowlisted tools, egress controls",
+        "Logging/redaction strategy for prompts",
+        "Policy: what data may never enter prompts"
+      ],
+      "demo": "Show blocked injection attempt + allowed safe query side-by-side"
     }
   ]
 };

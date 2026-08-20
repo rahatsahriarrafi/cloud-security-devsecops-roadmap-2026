@@ -66,14 +66,14 @@
       const n = m ? Number(m[1]) : 8;
       return { min: n, max: n + 4, parallel: false, ongoing: true, label: n + "+ weeks" };
     }
-    const range = d.match(/(\d+)\s*[â€“\-]\s*(\d+)/);
+    const range = d.match(/(\d+)\s*[–\-]\s*(\d+)/);
     if (range) {
       return {
         min: Number(range[1]),
         max: Number(range[2]),
         parallel: false,
         ongoing: false,
-        label: range[1] + "â€“" + range[2] + " weeks",
+        label: range[1] + "–" + range[2] + " weeks",
       };
     }
     const single = d.match(/(\d+)/);
@@ -111,8 +111,8 @@
         pathEndMin: endMin,
         pathEndMax: endMax,
         pathLabel: w.ongoing
-          ? "Path weeks " + start + "â€“" + endMax + "+"
-          : "Path weeks " + start + "â€“" + endMax,
+          ? "Path weeks " + start + "–" + endMax + "+"
+          : "Path weeks " + start + "–" + endMax,
       };
       sumMin += w.min;
       sumMax += w.max;
@@ -136,15 +136,15 @@
     el.innerHTML =
       '<div class="week-summary-card"><strong>' +
       sumMin +
-      "â€“" +
+      "–" +
       sumMax +
-      ' weeks</strong><span>full path (phases 0â€“8)</span></div>' +
+      ' weeks</strong><span>full path (phases 0–8)</span></div>' +
       '<div class="week-summary-card"><strong>~' +
       monthsMin +
-      "â€“" +
+      "–" +
       monthsMax +
       ' months</strong><span>full-time equivalent estimate</span></div>' +
-      '<div class="week-summary-card"><strong>Career track</strong><span>parallel â€” not added to week total</span></div>';
+      '<div class="week-summary-card"><strong>Career track</strong><span>parallel — not added to week total</span></div>';
   }
 
 
@@ -265,7 +265,7 @@
       btn.setAttribute("aria-selected", phase.id === activeId ? "true" : "false");
       btn.setAttribute("aria-controls", "phase-panel");
       btn.tabIndex = phase.id === activeId ? 0 : -1;
-      const mark = doneIds.includes(phase.id) ? " Â· done" : "";
+      const mark = doneIds.includes(phase.id) ? " · done" : "";
       btn.innerHTML =
         "Phase " +
         phase.order +
@@ -528,7 +528,7 @@
         "<strong>Solved: ROI table is only a summary.</strong> " +
         escapeHtml(
           plan.enoughNote ||
-            "Use the full phase cert map, exam prep, and per-phase Cert guide in the curriculum."
+            "Use the full phase cert map, exam coverage, exam prep, and per-phase Cert guide."
         ) +
         ' Also open any <a href="#phases">phase</a> for an inline Cert guide tied to that path.';
     }
@@ -585,6 +585,43 @@
               })
               .join("") +
             "</ol></article>"
+          );
+        })
+        .join("");
+    }
+
+    const coverage = document.getElementById("cert-exam-coverage");
+    if (coverage) {
+      coverage.innerHTML = (plan.examCoverage || [])
+        .map(function (e) {
+          return (
+            '<article class="exam-coverage-card"><div class="project-head"><h3>' +
+            escapeHtml(e.cert) +
+            '</h3><span class="pill teal">' +
+            escapeHtml(e.afterPhases) +
+            "</span></div><p class=\"exam-verdict\">" +
+            escapeHtml(e.verdict) +
+            "</p><p class=\"muted\">" +
+            escapeHtml(e.canSitIf) +
+            '</p><h4 class="block-title">Covered from this path</h4><ul>' +
+            (e.coversFromPath || [])
+              .map(function (d) {
+                return "<li>" + escapeHtml(d) + "</li>";
+              })
+              .join("") +
+            '</ul><h4 class="block-title">Exam domains</h4><ul>' +
+            (e.examDomains || [])
+              .map(function (d) {
+                return "<li>" + escapeHtml(d) + "</li>";
+              })
+              .join("") +
+            '</ul><h4 class="block-title">Still study separately</h4><ul>' +
+            (e.gapsToStudyExtra || [])
+              .map(function (d) {
+                return "<li>" + escapeHtml(d) + "</li>";
+              })
+              .join("") +
+            "</ul></article>"
           );
         })
         .join("");

@@ -1788,8 +1788,8 @@ window.ROADMAP = {
   ],
   "certPlan": {
     "title": "Recommended path (best ROI)",
-    "rule": "Checkpoint lab / phase project first, then exam. Pick one cloud and stay on that track. Certs prove signal — projects prove skill.",
-    "enoughNote": "The short ROI table alone is not enough. This page now includes a full per-phase cert map, exam prep cards, priority order, role→cert→project pairing, and an inline Cert guide inside every phase panel.",
+    "rule": "Checkpoint lab / phase project first, then exam. Pick one cloud and stay on that track. Use Exam coverage below to see what Phase 0–1 (and later phases) actually cover for each cert.",
+    "enoughNote": "The short ROI table alone is not enough. This page includes a full per-phase cert map, exam-content coverage for every recommended cert (what phases cover vs exam gaps), exam prep cards, priority order, role→cert→project pairing, and an inline Cert guide in every phase panel.",
     "roiPath": [
       {
         "stage": "1",
@@ -2051,6 +2051,255 @@ window.ROADMAP = {
       "Do not chase GIAC first unless your employer pays",
       "Do not sit AWS Security Specialty / AZ-500 before Phase 2 project",
       "Do not book CKS before CKA and a hardened cluster lab"
+    ],
+    "examCoverage": [
+      {
+        "cert": "AWS Cloud Practitioner (CLF-C02)",
+        "afterPhases": "0–1 (optional)",
+        "canSitIf": "You finished Foundations + Cloud Platform Core labs (landing zone basics).",
+        "coversFromPath": [
+          "Shared responsibility model",
+          "Core AWS services (EC2, S3, VPC, IAM overview, CloudWatch/CloudTrail awareness)",
+          "Cloud economics / billing basics",
+          "Security & compliance high-level concepts from Phase 0"
+        ],
+        "examDomains": [
+          "Cloud concepts",
+          "Security and compliance",
+          "Cloud technology and services",
+          "Billing, pricing, and support"
+        ],
+        "gapsToStudyExtra": [
+          "AWS global infrastructure naming (Regions/AZs/Edge)",
+          "Support plans & pricing calculator scenarios",
+          "Service catalog breadth (many services only need recognition, not deep labs)"
+        ],
+        "verdict": "Yes — Phase 0–1 covers most concepts. Add 3–7 days of AWS-specific service flashcards before the exam."
+      },
+      {
+        "cert": "AZ-900 Microsoft Azure Fundamentals",
+        "afterPhases": "0–1 (optional)",
+        "canSitIf": "Same readiness as CCP, but on Azure vocabulary (Entra ID, VNet, Resource Groups).",
+        "coversFromPath": [
+          "Cloud concepts & shared responsibility",
+          "Core Azure primitives mapped in Phase 1",
+          "Identity basics, networking, storage, compute",
+          "Security/governance awareness (Policy, Defender overview)"
+        ],
+        "examDomains": [
+          "Cloud concepts",
+          "Azure architecture and services",
+          "Azure management and governance"
+        ],
+        "gapsToStudyExtra": [
+          "Azure portal navigation & product names",
+          "Management groups / subscriptions wording",
+          "Azure pricing & SLA question patterns"
+        ],
+        "verdict": "Yes — Phase 0–1 is enough conceptually. Spend a few days on Microsoft Learn AZ-900 modules for naming."
+      },
+      {
+        "cert": "CompTIA Security+",
+        "afterPhases": "0–4 (optional baseline)",
+        "canSitIf": "Strong Phase 0 + exposure to Phase 2–4 controls and pipelines.",
+        "coversFromPath": [
+          "Threats, crypto, networking, IAM concepts (Phase 0)",
+          "Secure architecture & cloud security themes (Phase 2)",
+          "Secure ops / monitoring intro (Phase 7 overlap light)",
+          "AppSec / supply chain awareness (Phase 4 light)"
+        ],
+        "examDomains": [
+          "General security concepts",
+          "Threats, vulnerabilities, and mitigations",
+          "Security architecture",
+          "Security operations",
+          "Security program management and oversight"
+        ],
+        "gapsToStudyExtra": [
+          "On-prem / hybrid topics not deep in this cloud path",
+          "PKI procedural details & incident frameworks wording",
+          "Governance/risk/compliance exam language"
+        ],
+        "verdict": "Partial — great foundation overlap, but not a perfect 1:1. Use Security+ only if you need a vendor-neutral baseline."
+      },
+      {
+        "cert": "AWS Security Specialty",
+        "afterPhases": "2 (primary) · reinforced by 6–7",
+        "canSitIf": "CSPM Fix-It project done + IAM/KMS/logging labs solid.",
+        "coversFromPath": [
+          "IAM, federation, least privilege, Access Analyzer (Phase 2)",
+          "KMS, encryption, secrets, S3 exposure (Phase 2)",
+          "CloudTrail/Config/GuardDuty/Security Hub (Phase 2 + 7)",
+          "VPC security patterns from Phase 1–2",
+          "Incident response & detective controls (Phase 7)",
+          "Identity/Zero Trust themes (Phase 6) help IAM scenarios"
+        ],
+        "examDomains": [
+          "Incident response",
+          "Logging and monitoring",
+          "Infrastructure security",
+          "Identity and access management",
+          "Data protection"
+        ],
+        "gapsToStudyExtra": [
+          "AWS service-specific exam tricks (WAF, Shield, Macie, Analyzer details)",
+          "Multi-account Organizations/SCP exam scenarios",
+          "Timed practice exams for wording"
+        ],
+        "verdict": "Mostly yes after Phase 2 projects. Do official domain review + practice tests; Phase 6–7 make you stronger."
+      },
+      {
+        "cert": "AZ-500 Azure Security Engineer",
+        "afterPhases": "2 (primary) · reinforced by 6–7",
+        "canSitIf": "Azure landing zone + CSPM-style remediations + Entra ID labs done.",
+        "coversFromPath": [
+          "Entra ID, Conditional Access, PIM (Phase 2 + 6)",
+          "Key Vault, encryption, private endpoints (Phase 2)",
+          "Network security / NSG / Firewall concepts (Phase 1–2)",
+          "Defender for Cloud posture (Phase 2)",
+          "Monitoring / Sentinel awareness (Phase 7)"
+        ],
+        "examDomains": [
+          "Manage identity and access",
+          "Secure networking",
+          "Secure compute, storage, and databases",
+          "Configure Azure security posture management / Defender"
+        ],
+        "gapsToStudyExtra": [
+          "Portal click-path familiarity",
+          "Microsoft-specific product bundling questions",
+          "Hybrid identity (AD Connect) if not labbed"
+        ],
+        "verdict": "Mostly yes after Phase 2 (+ Phase 6 identity labs). Add Microsoft Learn paths for exam wording."
+      },
+      {
+        "cert": "Google Professional Cloud Security Engineer",
+        "afterPhases": "2–6",
+        "canSitIf": "GCP equivalents of landing zone + IAM + VPC-SC/KMS + SCC practice.",
+        "coversFromPath": [
+          "IAM & access (Phases 2, 6)",
+          "Network security (Phases 1–2)",
+          "Data protection / KMS (Phase 2)",
+          "Security operations / SCC (Phases 2, 7)",
+          "Compliance / org policy themes (Phase 2, 8)"
+        ],
+        "examDomains": [
+          "Configuring access within a cloud solution environment",
+          "Configuring network security",
+          "Ensuring data protection",
+          "Managing operations within a cloud solution environment",
+          "Ensuring compliance"
+        ],
+        "gapsToStudyExtra": [
+          "GCP product names & VPC Service Controls depth",
+          "Binary Authorization / Assured Workloads recognition",
+          "Case-style practice questions"
+        ],
+        "verdict": "Yes if your Phase 1–2–6–7 labs were done on GCP (or dual-cloud mapped). Otherwise remap labs to GCP first."
+      },
+      {
+        "cert": "CKA (Certified Kubernetes Administrator)",
+        "afterPhases": "5",
+        "canSitIf": "You can operate a cluster with kubectl confidently (Hardened GitOps Cluster helps).",
+        "coversFromPath": [
+          "Workloads, services, storage patterns from Phase 5",
+          "Networking & troubleshooting basics",
+          "Cluster architecture awareness",
+          "RBAC fundamentals (security-relevant subset)"
+        ],
+        "examDomains": [
+          "Cluster architecture, installation & configuration",
+          "Workloads & scheduling",
+          "Services & networking",
+          "Storage",
+          "Troubleshooting"
+        ],
+        "gapsToStudyExtra": [
+          "Timed performance exam speed",
+          "etcd backup/restore drills",
+          "Install/upgrade tasks if you only used kind/managed K8s"
+        ],
+        "verdict": "Phase 5 covers a large share, but CKA is a hands-on speed exam — schedule Killer.sh-style practice."
+      },
+      {
+        "cert": "CKS (Certified Kubernetes Security Specialist)",
+        "afterPhases": "5 (+ 4 supply chain helps)",
+        "canSitIf": "CKA passed + Hardened GitOps Cluster (PSS, NetworkPolicy, admission, runtime) done.",
+        "coversFromPath": [
+          "PSS / securityContext / RBAC (Phase 5)",
+          "NetworkPolicy default deny (Phase 5)",
+          "Admission policies Kyverno/Gatekeeper (Phase 5)",
+          "Image scanning / supply chain ideas (Phase 4–5)",
+          "Runtime detection Falco (Phase 5)",
+          "Secrets handling themes (Phase 5–6)"
+        ],
+        "examDomains": [
+          "Cluster setup hardening",
+          "Cluster hardening",
+          "System hardening",
+          "Minimize microservice vulnerabilities",
+          "Supply chain security",
+          "Monitoring, logging, and runtime security"
+        ],
+        "gapsToStudyExtra": [
+          "kube-bench / CIS kubelet API server flags under time pressure",
+          "AppArmor/seccomp exam tasks",
+          "Specific tool CLIs used in CKS curriculum versions"
+        ],
+        "verdict": "Strong overlap with Phase 5 project. Still needs dedicated timed CKS labs after CKA."
+      },
+      {
+        "cert": "CCSP",
+        "afterPhases": "8+ (later)",
+        "canSitIf": "1–2 years applied cloud security depth + architecture docs (not right after Phase 1).",
+        "coversFromPath": [
+          "Cloud architecture & shared responsibility (whole path)",
+          "Data security & IAM (Phases 2, 6)",
+          "Platform/application security (Phases 4–5)",
+          "Ops / IR / legal-compliance themes (Phases 7–8)",
+          "Governance / risk (Phase 8)"
+        ],
+        "examDomains": [
+          "Cloud concepts, architecture and design",
+          "Cloud data security",
+          "Cloud platform & infrastructure security",
+          "Cloud application security",
+          "Cloud security operations",
+          "Legal, risk and compliance"
+        ],
+        "gapsToStudyExtra": [
+          "Heavy framework/legal memorization",
+          "Broad multi-cloud theory beyond your primary cloud",
+          "Experience-based judgment questions"
+        ],
+        "verdict": "Path builds the practical base, but CCSP needs extra study + experience. Not an early exam."
+      },
+      {
+        "cert": "CISSP",
+        "afterPhases": "Later (experience-gated)",
+        "canSitIf": "Meet ISC2 experience requirements; after broad security practice.",
+        "coversFromPath": [
+          "Security & risk management vocabulary (Phase 0, 8)",
+          "Asset/identity/security ops themes across path",
+          "Cloud/app security subset from Phases 2–5"
+        ],
+        "examDomains": [
+          "Security and risk management",
+          "Asset security",
+          "Security architecture and engineering",
+          "Communication and network security",
+          "Identity and access management",
+          "Security assessment and testing",
+          "Security operations",
+          "Software development security"
+        ],
+        "gapsToStudyExtra": [
+          "Many domains beyond cloud-only path (physical, broader enterprise)",
+          "Managerial / policy-heavy question style",
+          "Official CBK study commitment"
+        ],
+        "verdict": "This roadmap helps cloud-heavy domains only. CISSP is much broader — treat as long-term, not path-complete."
+      }
     ]
   }
 };
